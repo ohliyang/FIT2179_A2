@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Badminton in Australia - Data Visualisation</title>
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
+    <script src="vega_lite_vis.js"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,700;1,14..32,700&family=Luckiest+Guy&family=Montserrat:ital,wght@0,600;1,600&family=Poppins:wght@500&family=Ranchers&family=Source+Sans+3:ital@0;1&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <header>
+        
+        <div class="header-content">
+            <div>
+
+                <img src="badminton_image2.png" height="250" alt="Description of image">
+
+            </div>
+            <div class="header-text">
+                <h1>Badminton in Australia (2023 - 2024)</h1>
+                <h2>Participation, People, and Place</h2>
+                <p>
+                    A national snapshot of who plays badminton, where they play, how
+                    they participate, and the experience that shape the sport.
+                </p>
+            </div>
+
+            <div class="header-buttons">
+                <a href="#overview-section" class="nav-button">Overview</a>
+                <a href="#participants-section" class="nav-button">Who</a>
+                <a href="#places-section" class="nav-button">Where</a>
+                <a href="#others-section" class="nav-button">Others</a>
+            </div>
+
+        </div>
+    </header>
+
+    <div class="container">
+
+        <table class="dashboard-table">
+
+
+            <tbody id="overview-section" class="section-box section1-border">
+                <!-- ROW 1 (FULL WIDTH HEADER VISUAL SUMMARY) -->
+                <tr>
+                    <td colspan="3" class="full-span section1-heading">
+
+                        <div class="section-header-row">
+
+                            <div>
+                                <div class="section-title">OVERVIEW: The Big Picture</div>
+
+                                <div class="section-subtitle">
+                                    Overall participation trends show state-level variation, with ACT and VIC leading
+                                    participation
+                                    rates while infrastructure and club growth continue to support nationwide
+                                    engagement.
+                                </div>
+                            </div>
+
+                            <div class="section-buttons">
+                                <a href="#top" class="top-button">↑ Top</a>
+                            </div>
+
+                        </div>
+                    </td>
+                </tr>
+
+                <!-- ROW 2 -->
+                <tr>
+                    <td colspan="2" rowspan="2" class="cat1">
+                        <div class="chart-title">Badminton Participation Across Australia (2024)</div>
+                        <div class="chart-subtitle">NSW and VIC contribute over 260,000 participants, while ACT records
+                            the highest rate</div>
+                        <div id="map_chart"></div>
+                        <div class="story" id="chart1">The hybrid map reveals clear geographic inequalities in badminton
+                            participation
+                            across Australia. Victoria and New South Wales dominate in participant numbers, together
+                            accounting for more than two-thirds of all participants nationally, while the Australian
+                            Capital
+                            Territory records the highest participation rate at 2.5% despite having a relatively small
+                            population, indicating a particularly active badminton community. Queensland and South
+                            Australia show comparatively lower participation rates despite their large geographic
+                            coverage. The proportional circles further highlight the dominance of populous states in
+                            overall participant numbers, while the choropleth layer exposes differences in participation
+                            intensity rather than raw volume.
+                        </div>
+                        <div class="insight" id="chart1">Key Insight: ACT has the highest participation rate, but NSW
+                            and VIC drive
+                            Australia’s badminton participation by sheer participant volume.</div>
+                    </td>
+                    <td class="cat1">
+                        <div class="chart-title">Changes in Participation Rate by State (2023-2024)</div>
+                        <div class="chart-subtitle">Queensland recorded the largest increase, rising from 0.9% to 1.1%
+                        </div>
+                        <div id="comet_chart"></div>
+                        <div class="story">The comet chart highlights uneven participation trends across Australian
+                            states between 2023 and 2024. Queensland, New South Wales, Northern Territory, and Western
+                            Australia recorded modest growth, whereas South Australia experienced the sharpest decline,
+                            falling from 1.9% to 1.0%. Despite small decreases, Victoria and the ACT remained among the
+                            nation’s strongest-performing regions.</div>
+                        <div class="insight">Key Insight: Participation growth was uneven nationally, with South
+                            Australia
+                            experiencing the most significant decline.</div>
+                    </td>
+                </tr>
+
+                <!-- ROW 3 -->
+                <tr>
+                    <td class="cat1">
+                        <div class="chart-title">Growth of Badminton Clubs and Associations</div>
+                        <div class="chart-subtitle">Club numbers surged by over 35% between 2023 and 2024
+                        </div>
+                        <div id="line_chart"></div>
+                        <div class="story">The number of badminton clubs and associations remained relatively stable
+                            between 2020 and 2023 before increasing sharply to 380 organisations in 2024. This
+                            substantial rise likely reflects growing public interest, expanding accessibility, and
+                            stronger institutional support following pandemic recovery. The trend suggests rapid
+                            grassroots expansion and improving national badminton infrastructure.</div>
+                        <div class="insight">Key Insight: The sharp rise in clubs during 2024 suggests rapid expansion
+                            of
+                            badminton infrastructure and accessibility.</div>
+                    </td>
+                </tr>
+            </tbody>
+
+            <tbody id="participants-section" class="section-box section2-border">
+                <tr>
+                    <td colspan="3" class="full-span section2-heading">
+                        <div class="section-header-row">
+
+                            <div>
+                                <div class="section-title">
+                                    WHO: Understanding the Participants
+                                </div>
+
+                                <div class="section-subtitle">
+                                    This section explores how geography, remoteness,
+                                    and infrastructure influence participation patterns.
+                                </div>
+                            </div>
+
+                            <div class="section-buttons">
+                                <a href="#overview-section" class="top-button">← Prev</a>
+                                <a href="#top" class="top-button">↑ Top</a>
+                            </div>
+
+                        </div>
+                    </td>
+                </tr>
+
+                <!-- ROW 4 -->
+                <tr>
+                    <td class="cat2">
+                        <div class="chart-title">Gender Participation Comparison</div>
+                        <div class="chart-subtitle">Male participation exceeds female participation by 40%</div>
+                        <div id="isotype"></div>
+                        <div class="story">The isotype chart highlights a persistent gender gap in badminton
+                            participation, with male participation consistently exceeding female participation across
+                            both years. Male participation increased slightly from 2.0% to 2.1%, while female
+                            participation remained stable at 1.5%. The repeated icon structure makes the disparity
+                            visually intuitive and immediately understandable for audiences.</div>
+                        <div class="insight">Key Insight: Male participation remains consistently higher than female
+                            participation, with the gender gap persisting across both years.</div>
+                    </td>
+                    <td class="cat2">
+                        <div class="chart-title">Participation by State and Gender</div>
+                        <div class="chart-subtitle">NSW and Victoria dominate participation across both genders</div>
+                        <div id="diverging_bar"></div>
+                        <div class="story">Across nearly all states, male participation estimates exceeded female
+                            participation in both 2023 and 2024, with the largest differences occurring in New South
+                            Wales and Victoria. However, Queensland and Western Australia recorded meaningful increases
+                            in female participation between years. The comparison highlights regional differences in
+                            gender participation growth across Australia.</div>
+                        <div class="insight">Key Insight: While males continue to dominate participation, female
+                            participation increased across several major states in 2024.</div>
+                    </td>
+                    <td class="cat2">
+                        <div class="chart-title">Participation Rate by Age and Gender</div>
+                        <div class="chart-subtitle">Teenagers recorded the highest participation rates nationally</div>
+                        <div id="heat_map"></div>
+                        <div class="story">Participation is heavily concentrated among younger Australians, particularly
+                            those aged 15–17 and 18–24. Female teenagers recorded the highest participation rate overall
+                            at 8.1%, while participation declines sharply across older age groups for both genders. The
+                            heatmap clearly positions badminton as a predominantly youth-oriented recreational and
+                            sporting activity nationwide.</div>
+                        <div class="insight">Key Insight: Teenagers aged 15-17 are the most actively engaged age group,
+                            with
+                            participation declining significantly with age.</div>
+                    </td>
+                </tr>
+
+                <!-- ROW 5 -->
+                <tr>
+                    <td class="cat2">
+                        <div class="chart-title">Participation Rate by Household Income</div>
+                        <div class="chart-subtitle">Participation peaks among households earning $100k-$149k</div>
+                        <div id="scatterplot"></div>
+                        <div class="story">Participation rates generally increase alongside household income up to the
+                            $100,000-$149,999 income bracket, which records the highest participation rate at 2.0%.
+                            Beyond
+                            this threshold, participation begins to decline slightly among the highest-income
+                            households.
+                            This suggests badminton participation may be strongest among middle-to-upper-middle income
+                            groups rather than the wealthiest households.</div>
+                        <div class="insight">Key Insight: Participation peaks among middle-to-upper-middle income
+                            households
+                            rather than the highest earners.</div>
+                    </td>
+                    <td class="cat2">
+                        <div class="chart-title">Indigenous Participation Comparison</div>
+                        <div class="chart-subtitle">Indigenous representation fell from 9.9% to 5.0% in one year</div>
+                        <div id="pie_chart"></div>
+                        <div class="story">The proportion of Indigenous badminton participants decreased substantially
+                            from
+                            9.92% in 2023 to 5.02% in 2024, while non-Indigenous participation increased
+                            correspondingly.
+                            This shift may indicate changing participation accessibility, engagement levels, or
+                            demographic
+                            representation within organised badminton activities. The visual contrast between years
+                            highlights a widening participation imbalance.</div>
+                        <div class="insight">Key Insight: Indigenous representation in badminton participation declined
+                            noticeably between 2023 and 2024.</div>
+                    </td>
+                    <td class="cat2">
+                        <div class="chart-title">Participation by Employment Status</div>
+                        <div class="chart-subtitle">Casually employed participation
+                            declined sharply from 2023 to 2024</div>
+                        <div id="dumbbell_chart"></div>
+                        <div class="story">Casual workers recorded the highest participation rate in 2023, although this
+                            declined noticeably in 2024. Unemployed individuals experienced the strongest growth,
+                            increasing from 1.7% to 2.0%, while full-time and part-time employment groups declined
+                            slightly. These patterns suggest time flexibility and lifestyle factors strongly influence
+                            badminton participation behaviour.</div>
+                        <div class="insight">Key Insight: Participation among unemployed Australians increased in 2024,
+                            while most employed groups experienced slight declines.</div>
+                    </td>
+                </tr>
+            </tbody>
+
+            <tbody id="places-section" class="section-box section3-border">
+                <!-- ROW 6 (FULL WIDTH CATEGORY BREAK) -->
+                <tr>
+                    <td colspan="3" class="full-span section3-heading">
+
+                        <div class="section-header-row">
+
+                            <div>
+                                <div class="section-title">WHERE: Places and Spaces</div>
+
+                                <div class="section-subtitle">This section explores how geography, remoteness, and
+                                    infrastructure influence
+                                    participation patterns.</div>
+                            </div>
+
+                            <div class="section-buttons">
+                                <a href="#participants-section" class="top-button">← Prev</a>
+                                <a href="#top" class="top-button">↑ Top</a>
+                            </div>
+
+                        </div>
+                    </td>
+                </tr>
+
+                <!-- ROW 7 -->
+                <tr>
+                    <td class="cat3">
+                        <div class="chart-title">Participation by Remoteness</div>
+                        <div class="chart-subtitle">Remote participation declined significantly from 2023 to 2024</div>
+                        <div id="slope_chart"></div>
+                        <div class="story">Major cities consistently recorded the highest participation rates at 2.2%
+                            across both years, reinforcing the concentration of badminton activity within urban
+                            Australia. Outer regional participation increased significantly from 0.6% to 1.0%, while
+                            remote participation declined sharply to 0.4% in 2024. Accessibility and sporting
+                            infrastructure likely contribute to these disparities.</div>
+                        <div class="insight">Key Insight: Urban areas remain the dominant participation hubs, although
+                            outer
+                            regional participation showed notable improvement.</div>
+                    </td>
+                    <td class="cat3">
+                        <div class="chart-title">Where Australians Play Badminton</div>
+                        <div class="chart-subtitle">Informal and community-based participation dominates nationwide
+                        </div>
+                        <div id="sankey_diagram"></div>
+                        <div class="story">Badminton participation flows most strongly toward organised sporting
+                            facilities, gyms, and leisure centres across Australia. Victoria and New South Wales
+                            contribute the largest participation volumes due to their population size, while informal
+                            settings such as homes and public spaces remain important participation venues. The diagram
+                            highlights the importance of accessible infrastructure nationwide.
+                        </div>
+                        <div class="insight">Key Insight: Organised sports clubs and gym facilities are the primary
+                            participation venues, especially in highly populated states.</div>
+                    </td>
+                    <td class="cat3">
+                        <div class="chart-title">Ways Australians Participate in Badminton</div>
+                        <div class="chart-subtitle">Nearly half of participation occurs informally with friends or
+                            family</div>
+                        <div id="tree_map"></div>
+                        <div class="story">Informal participation with friends and family accounts for nearly half of
+                            all badminton participation pathways at 46.62%, substantially exceeding organised club
+                            participation. Individual informal play also represents a significant share, reinforcing
+                            badminton’s accessibility as a casual recreational activity. The distribution demonstrates
+                            the sport’s strong social and community-oriented participation culture.
+                        </div>
+                        <div class="insight">Key Insight: Informal participation with friends and family is the most
+                            common pathway into badminton participation.</div>
+                    </td>
+                </tr>
+            </tbody>
+
+            <tbody id="others-section" class="section-box section4-border">
+                <tr>
+                    <td colspan="3" class="full-span section4-heading">
+
+                        <div class="section-header-row">
+
+                            <div>
+                                <div class="section-title">OTHERS: Experience and Impact</div>
+
+                                <div class="section-subtitle">This section explores how geography, remoteness, and
+                                    infrastructure influence
+                                    participation patterns.</div>
+                            </div>
+
+                            <div class="section-buttons">
+                                <a href="#places-section" class="top-button">← Prev</a>
+                                <a href="#top" class="top-button">↑ Top</a>
+                            </div>
+
+                        </div>
+                    </td>
+                </tr>
+
+                <!-- ROW 8 -->
+                <tr>
+                    <td class="cat4">
+                        <div class="chart-title">Financial Commitment to Participation</div>
+                        <div class="chart-subtitle">Over 215,000 Australians paid to participate in badminton</div>
+                        <div id="waffle_chart"></div>
+                        <div class="story">More than half of badminton participants (55.2%) paid to participate,
+                            contributing a total expenditure exceeding $69 million nationally. Although the median
+                            expenditure was relatively modest at $100, the mean expenditure of $321 indicates some
+                            participants spend substantially more on badminton-related activities. This demonstrates
+                            badminton's growing economic footprint within Australia's sport sector.</div>
+                        <div class="insight">Key Insight: Badminton generates substantial economic contribution despite
+                            relatively low average participation costs.</div>
+                    </td>
+                    <td class="cat4">
+                        <div class="chart-title">Badminton Injury Rates by Gender</div>
+                        <div class="chart-subtitle">Male injury rates remained consistently higher across both years
+                        </div>
+                        <div id="grouped_bar"></div>
+                        <div class="story">Male participants consistently recorded higher injury rates than female
+                            participants in both years, although injury rates declined overall from 2023 to 2024. Male
+                            injury rates fell from 9.7% to 7.3%, while female injury rates decreased from 6.5% to 5.4%.
+                            These reductions may indicate improved safety awareness, training practices, or
+                            participation
+                            conditions.</div>
+                        <div class="insight">Key Insight: Injury rates declined across both genders, though males
+                            remained
+                            more injury-prone than females.</div>
+                    </td>
+                    <td class="cat4">
+                        <div class="chart-title">Volunteer Contribution in Non-Playing Roles</div>
+                        <div class="chart-subtitle">Most badminton support roles are overwhelmingly volunteer-driven
+                        </div>
+                        <div id="stacked_bar"></div>
+                        <div class="story">Volunteering forms the backbone of non-playing
+                            involvement in badminton across Australia. Fundraising, administration, and general
+                            assistance roles were overwhelmingly volunteer-driven, while coaching and team management
+                            involved larger participation volumes overall. These findings emphasise the critical role
+                            community volunteers play in sustaining badminton operations nationwide.</div>
+                        <div class="insight">Key Insight: Community volunteering is essential to sustaining badminton's
+                            non-playing operational roles nationwide.</div>
+                    </td>
+                </tr>
+            </tbody>
+
+
+        </table>
+
+    </div>
+
+    <footer>
+        <div class="footer-wrapper">
+            <div>
+
+                <div class="footer-main-icon">💡</div>
+
+            </div>
+
+            <div class="footer-left">
+
+                <div class="footer-title">
+                    KEY TAKEAWAY
+                </div>
+
+                <div class="footer-text">
+                    Badminton participation in Australia is shaped by strong urban concentration, youth engagement,
+                    and highly social forms of participation. While participation continues growing through expanding
+                    infrastructure and community support, disparities across geography, gender, and demographics reveal
+                    important opportunities for more inclusive development nationwide.
+                </div>
+
+            </div>
+
+            <div class="footer-icons">
+
+                <div class="footer-box">
+                    <div class="emoji">📈</div>
+                    <p>Growing Participation</p>
+                </div>
+
+                <div class="footer-box">
+                    <div class="emoji">👨‍👩‍👧</div>
+                    <p>Inclusive Community</p>
+                </div>
+
+                <div class="footer-box">
+                    <div class="emoji">📍</div>
+                    <p>Diverse Pathways</p>
+                </div>
+
+                <div class="footer-box">
+                    <div class="emoji">🤝</div>
+                    <p>Volunteer Powered</p>
+                </div>
+
+                <div class="footer-box">
+                    <div class="emoji">💙</div>
+                    <p>Stronger Together</p>
+                </div>
+
+            </div>
+
+        </div>
+        <div>
+            <div class="footer-info">
+                    <strong>Data sources:</strong>Australian Sports Commission & Badminton Australia annual reports  &nbsp 
+                    <strong>Author:</strong>Li Yang Oh &nbsp
+                    <strong>Date:</strong>18 May 2026
+                </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>
