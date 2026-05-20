@@ -15,8 +15,6 @@ header {
     background:
         linear-gradient(135deg, #08152f 0%, #10244d 40%, #0d1f44 100%);
     color: white;
-    padding: 28px 50px;
-    border-bottom: 4px solid #4fc3f7;
     box-shadow: 0 4px 18px rgba(0, 0, 0, 0.3);
 }
 
@@ -24,18 +22,21 @@ header {
     display: flex;
     align-items: center;
     gap: 10px;
+    width: 2005px;
+    margin: 0 auto;
 }
 
 .header-icon {
     font-size: 15px;
     line-height: 1;
+    margin-left: 10px;
 }
 
 .header-text h1 {
     margin: 0;
-    font-size: 50px;
+    font-size: 45px;
     text-transform: uppercase;
-    letter-spacing: 5px;
+    letter-spacing: 2px;
     line-height: 1.15;
     font-family: "Luckiest Guy", cursive;
     font-weight: 400;
@@ -71,6 +72,7 @@ header {
     display: flex;
     gap: 12px;
     flex-wrap: wrap;
+    margin-right: 50px;
 }
 
 .nav-button {
@@ -93,21 +95,10 @@ header {
 }
 
 .nav-button:hover {
-    transform: translateY(-4px);
+    transform: translateY(-10px);
     background: rgba(255, 255, 255, 0.15);
 }
 
-.nav-button strong {
-    display: block;
-    font-size: 28px;
-    margin-bottom: 6px;
-}
-
-.nav-button span {
-    font-size: 13px;
-    letter-spacing: 0.5px;
-    opacity: 0.9;
-}
 
 
 
@@ -379,16 +370,11 @@ td {
 
 
 footer {
-    margin-top: 50px;
-
     background:
         linear-gradient(135deg, #08152f 0%, #10244d 50%, #0d1f44 100%);
 
     color: white;
-
-    padding: 35px 50px;
-
-    border-top: 4px solid #4fc3f7;
+    padding: 35px 0px;
 }
 
 .footer-wrapper {
@@ -396,12 +382,16 @@ footer {
     justify-content: space-between;
     align-items: center;
     gap: 15px;
+    width: 2005px;
+    margin: 0 auto;
 }
 
 /* LEFT */
 .footer-main-icon {
     font-size: 85px;
     line-height: 1;
+    margin-left: 20px;
+    margin-right: 10px;
 }
 
 .footer-left {
@@ -436,6 +426,8 @@ footer {
     display: flex;
     gap: 18px;
     flex-wrap: wrap;
+    margin-left: 20px;
+    margin-right: 50px;
 }
 
 .footer-box {
