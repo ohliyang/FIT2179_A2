@@ -1,0 +1,348 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "background": "#fff2d5",
+  "config": {
+    "view": {
+      "stroke": null
+    }
+  },
+  "width": 545,
+  "height": 305,
+  "data": {
+    "url": "chart10_slope_chart.csv"
+  },
+  "transform": [
+    {
+      "calculate": "toNumber(replace(datum['Participation Rate'], '%',''))",
+      "as": "rate"
+    }
+  ],
+  "encoding": {
+    "x": {
+      "field": "Year",
+      "type": "ordinal",
+      "axis": null
+    },
+    "y": {
+      "field": "rate",
+      "type": "quantitative",
+      "axis": null
+    },
+    "color": {
+      "field": "Remoteness",
+      "type": "nominal",
+      "legend": null
+    }
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "line",
+        "strokeWidth": 2
+      },
+      "params": [
+        {
+          "name": "hover",
+          "select": {
+            "type": "point",
+            "fields": [
+              "Remoteness"
+            ],
+            "on": "mouseover",
+            "clear": "mouseout"
+          }
+        }
+      ],
+      "encoding": {
+        "opacity": {
+          "condition": [
+            {
+              "param": "hover",
+              "value": 1
+            }
+          ],
+          "value": 0.15
+        },
+        "size": {
+          "condition": {
+            "param": "hover",
+            "empty": false,
+            "value": 9
+          },
+          "value": 2
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "point",
+        "filled": true,
+        "size": 80
+      },
+      "encoding": {
+        "size": {
+          "condition": {
+            "param": "hover",
+            "empty": false,
+            "value": 180
+          },
+          "value": 80
+        },
+        "opacity": {
+          "condition": [
+            {
+              "param": "hover",
+              "value": 1
+            }
+          ],
+          "value": 0.15
+        },
+        "tooltip": [
+          {
+            "field": "Remoteness",
+            "type": "nominal"
+          },
+          {
+            "field": "Year",
+            "type": "ordinal"
+          },
+          {
+            "field": "rate",
+            "type": "quantitative",
+            "format": ".1f"
+          }
+        ]
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.Year == 2023"
+        },
+        {
+          "calculate": "format(datum.rate, '.1f') + '%'",
+          "as": "rate_label"
+        }
+      ],
+      "params": [
+        {
+          "name": "hover2",
+          "select": {
+            "type": "point",
+            "fields": [
+              "Remoteness"
+            ],
+            "on": "mouseover",
+            "clear": "mouseout"
+          }
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "right",
+        "dx": -8,
+        "fontSize": 11
+      },
+      "encoding": {
+        "text": {
+          "field": "rate_label"
+        },
+        "size": {
+          "condition": {
+            "param": "hover2",
+            "empty": false,
+            "value": 12
+          },
+          "value": 11
+        },
+        "opacity": {
+          "condition": {
+            "param": "hover2",
+            "value": 1
+          },
+          "value": 0.25
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.Year == 2024"
+        },
+        {
+          "calculate": "format(datum.rate, '.1f') + '%'",
+          "as": "rate_label"
+        }
+      ],
+      "params": [
+        {
+          "name": "hover3",
+          "select": {
+            "type": "point",
+            "fields": [
+              "Remoteness"
+            ],
+            "on": "mouseover",
+            "clear": "mouseout"
+          }
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 8,
+        "fontSize": 11
+      },
+      "encoding": {
+        "text": {
+          "field": "rate_label"
+        },
+        "size": {
+          "condition": {
+            "param": "hover3",
+            "empty": false,
+            "value": 12
+          },
+          "value": 11
+        },
+        "opacity": {
+          "condition": {
+            "param": "hover3",
+            "value": 1
+          },
+          "value": 0.25
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.Year == 2023"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "right",
+        "dx": -50,
+        "fontSize": 12,
+        "fontWeight": "bold",
+        "cursor": "pointer"
+      },
+      "params": [
+        {
+          "name": "hover1",
+          "select": {
+            "type": "point",
+            "fields": [
+              "Remoteness"
+            ],
+            "on": "mouseover",
+            "clear": "mouseout"
+          }
+        }
+      ],
+      "encoding": {
+        "text": {
+          "field": "Remoteness"
+        },
+        "size": {
+          "condition": {
+            "param": "hover1",
+            "empty": false,
+            "value": 13
+          },
+          "value": 12
+        },
+        "opacity": {
+          "condition": {
+            "param": "hover1",
+            "value": 1
+          },
+          "value": 0.25
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "fontSize": 12,
+        "color": "black"
+      },
+      "encoding": {
+        "x": {
+          "value": 130
+        },
+        "y": {
+          "value": 270
+        },
+        "text": {
+          "value": "2023"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "fontSize": 12,
+        "color": "black"
+      },
+      "encoding": {
+        "x": {
+          "value": 410
+        },
+        "y": {
+          "value": 270
+        },
+        "text": {
+          "value": "2024"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "rect",
+        "fill": "#ffffff",
+        "stroke": "#999",
+        "cornerRadius": 4
+      },
+      "encoding": {
+        "x": {
+          "value": 230
+        },
+        "x2": {
+          "value": 440
+        },
+        "y": {
+          "value": 40
+        },
+        "y2": {
+          "value": 100
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "top",
+        "fontSize": 15,
+        "fill": "black"
+      },
+      "encoding": {
+        "x": {
+          "value": 235
+        },
+        "y": {
+          "value": 45
+        },
+        "text": {
+          "value": [
+            "Remote participation dropped",
+            "significantly while participation ",
+            "in major cities remains stable."
+          ]
+        }
+      }
+    }
+  ]
+}

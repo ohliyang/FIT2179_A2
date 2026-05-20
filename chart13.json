@@ -1,0 +1,132 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "background": "#ffe4e4",
+  "width": 605,
+  "height": 208,
+  "data": {
+    "values": [
+      {}
+    ]
+  },
+  "transform": [
+    {
+      "calculate": "sequence(1,101)",
+      "as": "Sequence"
+    },
+    {
+      "flatten": [
+        "Sequence"
+      ]
+    },
+    {
+      "calculate": "datum.Sequence <= 55 ? 'Paid' : 'Not Paid'",
+      "as": "category"
+    },
+    {
+      "calculate": "ceil(datum.Sequence/20)",
+      "as": "row"
+    },
+    {
+      "calculate": "datum.Sequence - (datum.row-1)*20",
+      "as": "col"
+    }
+  ],
+  "layer": [
+    {
+      "params": [
+        {
+          "name": "hoverCat",
+          "select": {
+            "type": "point",
+            "fields": [
+              "category"
+            ],
+            "on": "mouseover",
+            "clear": "mouseout"
+          }
+        }
+      ],
+      "mark": {
+        "type": "circle",
+        "filled": true,
+        "stroke": "#9e9b9b",
+        "strokeWidth": 0.5
+      },
+      "encoding": {
+        "x": {
+          "field": "col",
+          "type": "ordinal",
+          "axis": null
+        },
+        "y": {
+          "field": "row",
+          "type": "ordinal",
+          "axis": null,
+          "sort": "descending"
+        },
+        "color": {
+          "field": "category",
+          "type": "nominal",
+          "scale": {
+            "domain": [
+              "Paid",
+              "Not Paid"
+            ],
+            "range": [
+              "#0072B2",
+              "#BDBDBD"
+            ]
+          },
+          "legend": {
+            "title": null,
+            "orient": "bottom",
+            "direction": "horizontal",
+            "offset": 10
+          }
+        },
+        "size": {
+          "value": 350
+        },
+        "opacity": {
+          "condition": {
+            "param": "hoverCat",
+            "value": 1
+          },
+          "value": 0.25
+        },
+        "tooltip": [
+          {
+            "field": "category",
+            "type": "nominal"
+          },
+          {
+            "field": "Sequence",
+            "type": "quantitative"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "fontSize": 35,
+        "fontWeight": "bold",
+        "align": "center"
+      },
+      "encoding": {
+        "x": {
+          "value": 200
+        },
+        "y": {
+          "value": 40
+        },
+        "text": {
+          "value": "55% PAID"
+        },
+        "color": {
+          "value": "#4e79a7"
+        }
+      }
+    }
+  ]
+}

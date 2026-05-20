@@ -1,0 +1,529 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 1100,
+  "height": 700,
+  "config": {
+    "view": {
+      "stroke": null
+    }
+  },
+  "projection": {
+    "type": "mercator"
+  },
+  "background": "#d6e6fc",
+  "params": [
+    {
+      "name": "showCount",
+      "value": true,
+      "bind": {
+        "input": "checkbox",
+        "name": "Show Participants"
+      }
+    },
+    {
+      "name": "showAnnotation",
+      "value": true,
+      "bind": {
+        "input": "checkbox",
+        "name": "Show Annotations"
+      }
+    },
+    {
+      "name": "bubbleScale",
+      "value": 3000,
+      "bind": {
+        "input": "range",
+        "min": 500,
+        "max": 30000,
+        "step": 100,
+        "name": "Bubble Size "
+      }
+    }
+  ],
+  "datasets": {
+    "annotations": [
+      {
+        "state": "WA",
+        "x1": 103,
+        "x2": 112,
+        "y1": -26.7,
+        "y2": -29.4
+      },
+      {
+        "state": "QLD",
+        "x1": 148.5,
+        "x2": 157.5,
+        "y1": -16.5,
+        "y2": -20
+      },
+      {
+        "state": "TAS",
+        "x1": 150.7,
+        "x2": 160.4,
+        "y1": -41.5,
+        "y2": -43.2
+      },
+      {
+        "state": "SA",
+        "x1": 125.5,
+        "x2": 134,
+        "y1": -34,
+        "y2": -35.8
+      },
+      {
+        "state": "VIC",
+        "x1": 126.4,
+        "x2": 139,
+        "y1": -40,
+        "y2": -41.8
+      },
+      {
+        "state": "NT",
+        "x1": 108.2,
+        "x2": 121,
+        "y1": -12.5,
+        "y2": -15
+      },
+      {
+        "state": "NSW",
+        "x1": 153.5,
+        "x2": 161.5,
+        "y1": -26.8,
+        "y2": -30
+      },
+      {
+        "state": "ACT",
+        "x1": 152.7,
+        "x2": 159.8,
+        "y1": -34,
+        "y2": -37
+      }
+    ]
+  },
+  "layer": [
+    {
+      "data": {
+        "url": "STE_2016_AUST.json",
+        "format": {
+          "type": "topojson",
+          "feature": "australia"
+        }
+      },
+      "transform": [
+        {
+          "lookup": "properties.STE_NAME16",
+          "from": {
+            "data": {
+              "url": "chart1_map_data1.csv"
+            },
+            "key": "State",
+            "fields": [
+              "Participation Rate",
+              "Estimate",
+              "State Population"
+            ]
+          }
+        } 
+      ],
+      "params": [
+        {
+          "name": "hoverState",
+          "select": {
+            "type": "point",
+            "fields": [
+              "properties.STE_NAME16"
+            ],
+            "on": "mouseover",
+            "clear": "mouseout"
+          }
+        }
+      ],
+      "mark": {
+        "type": "geoshape",
+        "stroke": "white"
+      },
+      "encoding": {
+        "color": {
+          "field": "Participation Rate",
+          "type": "quantitative",
+          "scale": {
+            "scheme": "blues"
+          },
+          "title": "Participation Rate (%)"
+        },
+        "opacity": {
+          "condition": {
+            "param": "hoverState",
+            "value": 1
+          },
+          "value": 0.2
+        },
+        "tooltip": [
+          {
+            "field": "properties.STE_NAME16",
+            "title": "State"
+          },
+          {
+            "field": "Participation Rate",
+            "title": "Participation Rate (%)"
+          },
+          {
+            "field": "Estimate",
+            "title": "Participants"
+          },
+          {
+            "field": "State Population",
+            "title": "State Population",
+            "format": ","
+          }
+        ]
+      }
+    },
+    {
+      "data": {
+        "url": "chart1_map_data1.csv"
+      },
+      "mark": {
+        "type": "circle",
+        "color": "#ffab0e",
+        "opacity": 0.8,
+        "stroke": "black",
+        "strokeWidth": 0.5,
+        "tooltip": {
+          "content": "data"
+        }
+      },
+      "encoding": {
+        "longitude": {
+          "field": "lon",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "lat",
+          "type": "quantitative"
+        },
+        "size": {
+          "field": "Estimate",
+          "type": "quantitative",
+          "title": "Participant Count",
+          "scale": {
+            "range": [
+              50,
+              {
+                "expr": "bubbleScale"
+              }
+            ]
+          }
+        },
+        "opacity": {
+          "condition": {
+            "param": "showCount",
+            "value": 0.8
+          },
+          "value": 0
+        },
+        "text": {
+          "condition": {
+            "param": "showCount",
+            "field": "Estimate"
+          }
+        }
+      }
+    },
+    {
+      "data": {
+        "url": "chart1_map_data1.csv"
+      },
+      "mark": {
+        "type": "text",
+        "dy": 0,
+        "dx": 45,
+        "fontSize": 13,
+        "fontWeight": "bold"
+      },
+      "encoding": {
+        "longitude": {
+          "field": "lon",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "lat",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "State Symbol"
+        }
+      }
+    },
+    {
+      "data": {
+        "url": "chart1_map_data1.csv"
+      },
+      "transform": [
+        {
+          "calculate": "datum['Participation Rate'] + '%'",
+          "as": "ParticipationLabel"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "dy": 15,
+        "dx": 47,
+        "fontSize": 12,
+        "color": "black"
+      },
+      "encoding": {
+        "longitude": {
+          "field": "lon"
+        },
+        "latitude": {
+          "field": "lat"
+        },
+        "text": {
+          "field": "ParticipationLabel"
+        }
+      }
+    },
+    {
+      "data": {
+        "url": "chart1_map_data1.csv"
+      },
+      "mark": {
+        "type": "text",
+        "fontSize": 9,
+        "fontWeight": "bold",
+        "color": "black",
+        "dy": 0
+      },
+      "encoding": {
+        "longitude": {
+          "field": "lon"
+        },
+        "latitude": {
+          "field": "lat"
+        },
+        "text": {
+          "field": "Estimate",
+          "format": ","
+        },
+        "opacity": {
+          "condition": {
+            "param": "showCount",
+            "value": 0.8
+          },
+          "value": 0
+        }
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "state": "WA",
+            "lon": 117,
+            "lat": -27,
+            "labelLon": 112,
+            "labelLat": -28
+          },
+          {
+            "state": "NT",
+            "lon": 131,
+            "lat": -15,
+            "labelLon": 121,
+            "labelLat": -14
+          },
+          {
+            "state": "QLD",
+            "lon": 146,
+            "lat": -21,
+            "labelLon": 148.5,
+            "labelLat": -19
+          },
+          {
+            "state": "SA",
+            "lon": 132,
+            "lat": -31,
+            "labelLon": 131,
+            "labelLat": -34
+          },
+          {
+            "state": "NSW",
+            "lon": 150,
+            "lat": -30,
+            "labelLon": 153.5,
+            "labelLat": -29
+          },
+          {
+            "state": "VIC",
+            "lon": 142,
+            "lat": -37,
+            "labelLon": 139,
+            "labelLat": -41
+          }
+        ]
+      },
+      "mark": {
+        "type": "rule",
+        "stroke": "black",
+        "strokeWidth": 1.2
+      },
+      "encoding": {
+        "longitude": {
+          "field": "lon"
+        },
+        "latitude": {
+          "field": "lat"
+        },
+        "longitude2": {
+          "field": "labelLon"
+        },
+        "latitude2": {
+          "field": "labelLat"
+        },
+        "opacity": {
+          "condition": {
+            "param": "showAnnotation",
+            "value": 0.8
+          },
+          "value": 0
+        }
+      }
+    },
+    {
+      "data": {
+        "name": "annotations"
+      },
+      "mark": {
+        "type": "rect",
+        "fill": "#ffffff",
+        "stroke": "black",
+        "strokeWidth": 1.5,
+        "cornerRadius": 6
+      },
+      "encoding": {
+        "longitude": {
+          "field": "x1"
+        },
+        "longitude2": {
+          "field": "x2"
+        },
+        "latitude": {
+          "field": "y1"
+        },
+        "latitude2": {
+          "field": "y2"
+        },
+        "opacity": {
+          "condition": {
+            "param": "showAnnotation",
+            "value": 0.8
+          },
+          "value": 0
+        }
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "text": [
+              "ACT has the highest",
+              "participation rate at",
+              "2.5% despite small",
+              "population"
+            ],
+            "x": 152,
+            "y": -35.5
+          },
+          {
+            "text": [
+              "NSW has largest",
+              "badminton community",
+              "with nearly 138,000",
+              "participants"
+            ],
+            "x": 153,
+            "y": -28.5
+          },
+          {
+            "text": [
+              "VIC has strong participation rate",
+              "and second-largest participant base"
+            ],
+            "x": 126,
+            "y": -41.5
+          },
+          {
+            "text": [
+              "QLD has large population",
+              "but comparatively lower",
+              "participation rate"
+            ],
+            "x": 148,
+            "y": -18.5
+          },
+          {
+            "text": [
+              "WA participation remains",
+              "relatively strong outside",
+              "eastern states"
+            ],
+            "x": 102.5,
+            "y": -28.5
+          },
+          {
+            "text": [
+              "SA has participation rate",
+              "below national leaders"
+            ],
+            "x": 125,
+            "y": -35.5
+          },
+          {
+            "text": [
+              "TAS has smaller but",
+              "stable badminton community"
+            ],
+            "x": 150,
+            "y": -43
+          },
+          {
+            "text": [
+              "NT has low participation volume",
+              "due to sparse population distribution"
+            ],
+            "x": 108,
+            "y": -14.5
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "fontSize": 11,
+        "fontWeight": "bold",
+        "align": "left",
+        "dx": 20,
+        "dy": -20,
+        "color": "black"
+      },
+      "encoding": {
+        "longitude": {
+          "field": "x"
+        },
+        "latitude": {
+          "field": "y"
+        },
+        "text": {
+          "field": "text"
+        },
+        "opacity": {
+          "condition": {
+            "param": "showAnnotation",
+            "value": 0.8
+          },
+          "value": 0
+        }
+      }
+    }
+  ]
+}

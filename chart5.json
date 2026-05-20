@@ -1,0 +1,558 @@
+{
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "description": "Diverging bar chart of participation by state and gender.",
+  "background": "#e7f5e7",
+  "width": 800,
+  "height": 200,
+  "padding": 5,
+  "signals": [
+    {
+      "name": "chartWidth",
+      "value": 277
+    },
+    {
+      "name": "chartPad",
+      "value": 30
+    },
+    {
+      "name": "width",
+      "update": "2 * chartWidth + chartPad"
+    },
+    {
+      "name": "year",
+      "value": 2024,
+      "bind": {
+        "input": "range",
+        "min": 2023,
+        "max": 2024,
+        "step": 1,
+        "name": "2023"
+      }
+    },
+    {
+      "name": "hoverBar",
+      "value": null,
+      "on": [
+        {
+          "events": "rect:mouseover",
+          "update": "{state: datum.State, gender: datum.Gender}"
+        },
+        {
+          "events": "rect:mouseout",
+          "update": "null"
+        }
+      ]
+    }
+  ],
+  "data": [
+    {
+      "name": "raw",
+      "url": "chart5_diverging_bar.csv",
+      "format": {
+        "type": "csv"
+      }
+    },
+    {
+      "name": "filtered",
+      "source": "raw",
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "datum.Year == year"
+        },
+        {
+          "type": "formula",
+          "as": "Estimate",
+          "expr": "toNumber(replace(datum.Estimate, ',', ''))"
+        }
+      ]
+    },
+    {
+      "name": "male",
+      "source": "filtered",
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "datum.Gender == 'Male'"
+        }
+      ]
+    },
+    {
+      "name": "female",
+      "source": "filtered",
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "datum.Gender == 'Female'"
+        }
+      ]
+    },
+    {
+      "name": "totals",
+      "source": "filtered",
+      "transform": [
+        {
+          "type": "aggregate",
+          "groupby": [
+            "State"
+          ],
+          "fields": [
+            "Estimate"
+          ],
+          "ops": [
+            "sum"
+          ],
+          "as": [
+            "total"
+          ]
+        }
+      ]
+    }
+  ],
+  "scales": [
+    {
+      "name": "y",
+      "type": "band",
+      "range": [
+        {
+          "signal": "height"
+        },
+        0
+      ],
+      "round": true,
+      "domain": {
+        "data": "totals",
+        "field": "State",
+        "sort": {
+          "field": "total",
+          "order": "descending"
+        }
+      }
+    },
+    {
+      "name": "color",
+      "type": "ordinal",
+      "domain": [
+        "Male",
+        "Female"
+      ],
+      "range": [
+        "#4e79a7",
+        "#e15759"
+      ]
+    }
+  ],
+  "marks": [
+    {
+      "type": "text",
+      "interactive": false,
+      "from": {
+        "data": "totals"
+      },
+      "encode": {
+        "enter": {
+          "x": {
+            "signal": "chartWidth + chartPad / 2"
+          },
+          "y": {
+            "scale": "y",
+            "field": "State",
+            "band": 0.5
+          },
+          "text": {
+            "field": "State"
+          },
+          "align": {
+            "value": "center"
+          },
+          "baseline": {
+            "value": "middle"
+          },
+          "fill": {
+            "value": "black"
+          }
+        }
+      }
+    },
+    {
+      "type": "group",
+      "encode": {
+        "update": {
+          "x": {
+            "value": 0
+          },
+          "height": {
+            "signal": "height"
+          }
+        }
+      },
+      "scales": [
+        {
+          "name": "x",
+          "type": "linear",
+          "range": [
+            {
+              "signal": "chartWidth"
+            },
+            0
+          ],
+          "domain": {
+            "data": "filtered",
+            "field": "Estimate"
+          },
+          "nice": true,
+          "zero": true
+        }
+      ],
+      "marks": [
+        {
+          "type": "rect",
+          "from": {
+            "data": "female"
+          },
+          "encode": {
+            "enter": {
+              "x": {
+                "scale": "x",
+                "field": "Estimate"
+              },
+              "x2": {
+                "scale": "x",
+                "value": 0
+              },
+              "y": {
+                "scale": "y",
+                "field": "State"
+              },
+              "height": {
+                "scale": "y",
+                "band": 1,
+                "offset": -1
+              },
+              "fill": {
+                "scale": "color",
+                "value": "Female"
+              },
+              "tooltip": {
+                "signal": "{'State': datum.State, 'Gender': datum.Gender, 'Participants': format(datum.Estimate, ','), 'Year': datum.Year}"
+              }
+            },
+            "update": {
+              "fillOpacity": [
+                {
+                  "test": "hoverBar === null || (datum.State === hoverBar.state && datum.Gender === hoverBar.gender)",
+                  "value": 0.9
+                },
+                {
+                  "value": 0.25
+                }
+              ],
+              "stroke": [
+                {
+                  "test": "hoverBar && datum.State === hoverBar.state && datum.Gender === hoverBar.gender",
+                  "value": "black"
+                },
+                {
+                  "value": null
+                }
+              ],
+              "strokeWidth": [
+                {
+                  "test": "hoverBar && datum.State === hoverBar.state && datum.Gender === hoverBar.gender",
+                  "value": 2
+                },
+                {
+                  "value": 0
+                }
+              ]
+            }
+          }
+        },
+        {
+          "type": "text",
+          "from": {
+            "data": "female"
+          },
+          "encode": {
+            "enter": {
+              "x": {
+                "scale": "x",
+                "field": "Estimate",
+                "offset": -5
+              },
+              "y": {
+                "scale": "y",
+                "field": "State",
+                "band": 0.5
+              },
+              "text": {
+                "field": "Estimate"
+              },
+              "align": {
+                "value": "right"
+              },
+              "baseline": {
+                "value": "middle"
+              },
+              "fill": {
+                "value": "black"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "group",
+      "encode": {
+        "update": {
+          "x": {
+            "signal": "chartWidth + chartPad"
+          },
+          "height": {
+            "signal": "height"
+          }
+        }
+      },
+      "scales": [
+        {
+          "name": "x",
+          "type": "linear",
+          "range": [
+            0,
+            {
+              "signal": "chartWidth"
+            }
+          ],
+          "domain": {
+            "data": "filtered",
+            "field": "Estimate"
+          },
+          "nice": true,
+          "zero": true
+        }
+      ],
+      "marks": [
+        {
+          "type": "rect",
+          "from": {
+            "data": "male"
+          },
+          "encode": {
+            "enter": {
+              "x": {
+                "scale": "x",
+                "field": "Estimate"
+              },
+              "x2": {
+                "scale": "x",
+                "value": 0
+              },
+              "y": {
+                "scale": "y",
+                "field": "State"
+              },
+              "height": {
+                "scale": "y",
+                "band": 1,
+                "offset": -1
+              },
+              "fill": {
+                "scale": "color",
+                "value": "Male"
+              },
+              "tooltip": {
+                "signal": "{'State': datum.State, 'Gender': datum.Gender, 'Participants': format(datum.Estimate, ','), 'Year': datum.Year}"
+              }
+            },
+            "update": {
+              "fillOpacity": [
+                {
+                  "test": "hoverBar === null || (datum.State === hoverBar.state && datum.Gender === hoverBar.gender)",
+                  "value": 0.9
+                },
+                {
+                  "value": 0.25
+                }
+              ],
+              "stroke": [
+                {
+                  "test": "hoverBar && datum.State === hoverBar.state && datum.Gender === hoverBar.gender",
+                  "value": "black"
+                },
+                {
+                  "value": null
+                }
+              ],
+              "strokeWidth": [
+                {
+                  "test": "hoverBar && datum.State === hoverBar.state && datum.Gender === hoverBar.gender",
+                  "value": 2
+                },
+                {
+                  "value": 0
+                }
+              ]
+            }
+          }
+        },
+        {
+          "type": "text",
+          "from": {
+            "data": "male"
+          },
+          "encode": {
+            "enter": {
+              "x": {
+                "scale": "x",
+                "field": "Estimate",
+                "offset": 5
+              },
+              "y": {
+                "scale": "y",
+                "field": "State",
+                "band": 0.5
+              },
+              "text": {
+                "field": "Estimate"
+              },
+              "align": {
+                "value": "left"
+              },
+              "baseline": {
+                "value": "middle"
+              },
+              "fill": {
+                "value": "black"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "rect",
+      "encode": {
+        "enter": {
+          "x": {
+            "value": 400
+          },
+          "x2": {
+            "value": 570
+          },
+          "y": {
+            "value": 128
+          },
+          "y2": {
+            "value": 180
+          },
+          "fill": {
+            "value": "white"
+          },
+          "fillOpacity": {
+            "value": 0.9
+          },
+          "stroke": {
+            "value": "#4e79a7"
+          },
+          "strokeWidth": {
+            "value": 1.5
+          },
+          "cornerRadius": {
+            "value": 6
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "encode": {
+        "enter": {
+          "x": {
+            "value": 410
+          },
+          "y": {
+            "value": 140
+          },
+          "text": {
+            "value": ["NSW has the largest male", "participation count in both", "2023 and 2024"]
+          },
+          "baseline": {
+            "value": "middle"
+          },
+          "fontSize": {
+            "value": 12
+          },
+          "fontWeight": {
+            "value": "bold"
+          },
+          "fill": {
+            "value": "#1f3b73"
+          }
+        }
+      }
+    },
+    {
+      "type": "rect",
+      "encode": {
+        "enter": {
+          "x": {
+            "value": 20
+          },
+          "x2": {
+            "value": 205
+          },
+          "y": {
+            "value": 128
+          },
+          "y2": {
+            "value": 180
+          },
+          "fill": {
+            "value": "white"
+          },
+          "fillOpacity": {
+            "value": 0.9
+          },
+          "stroke": {
+            "value": "#e15759"
+          },
+          "strokeWidth": {
+            "value": 1.5
+          },
+          "cornerRadius": {
+            "value": 6
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "encode": {
+        "enter": {
+          "x": {
+            "value": 30
+          },
+          "y": {
+            "value": 140
+          },
+          "text": {
+            "value": ["Female dominance in NSW", "and VIC reduced significantly", "from 2023 to 2024"]
+          },
+          "baseline": {
+            "value": "middle"
+          },
+          "fontSize": {
+            "value": 12
+          },
+          "fontWeight": {
+            "value": "bold"
+          },
+          "fill": {
+            "value": "#e15759"
+          }
+        }
+      }
+    }
+  ]
+}

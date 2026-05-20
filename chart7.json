@@ -1,0 +1,180 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": "Participation Rate vs Household Income",
+  "background": "#e7f5e7",
+  "width": 565,
+  "height": 195,
+  "data": {
+    "url": "chart7_scatterplot.csv"
+  },
+  "params": [
+    {
+      "name": "selectedYear",
+      "value": 2024,
+      "bind": {
+        "input": "range",
+        "min": 2023,
+        "max": 2024,
+        "step": 1,
+        "name": "2023"
+      }
+    }
+  ],
+  "transform": [
+    {
+      "filter": "datum.Year == selectedYear"
+    },
+    {
+      "calculate": "toNumber(replace(datum['Participation Rate'], '%',''))",
+      "as": "rate"
+    },
+    {
+      "calculate": "datum.Income == '<$40,000' ? 20000 : datum.Income == '$40,000 - $69,999' ? 55000 : datum.Income == '$70,000 - $99,999' ? 85000 : datum.Income == '$100,000 - $149,999' ? 125000 : datum.Income == '$150,000 - $199,999' ? 175000 : 220000",
+      "as": "income_mid"
+    }
+  ],
+  "layer": [
+    {
+      "mark": {
+        "type": "point",
+        "filled": true,
+        "size": 100
+      },
+      "encoding": {
+        "x": {
+          "field": "income_mid",
+          "type": "quantitative",
+          "title": "Annual Household Income ($)"
+        },
+        "y": {
+          "field": "rate",
+          "type": "quantitative",
+          "title": "Participation Rate (%)",
+          "scale": {
+            "domain": [
+              0,
+              3
+            ]
+          }
+        },
+        "tooltip": [
+          {
+            "field": "Year",
+            "type": "ordinal"
+          },
+          {
+            "field": "Income",
+            "type": "nominal"
+          },
+          {
+            "field": "rate",
+            "type": "quantitative",
+            "title": "Participation Rate",
+            "format": ".1f"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "rule",
+        "color": "black",
+        "strokeDash": [
+          4,
+          4
+        ]
+      },
+      "encoding": {
+        "x": {
+          "aggregate": "mean",
+          "field": "income_mid"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "rule",
+        "color": "black",
+        "strokeDash": [
+          4,
+          4
+        ]
+      },
+      "encoding": {
+        "y": {
+          "aggregate": "mean",
+          "field": "rate"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "fontSize": 10,
+        "color": "black"
+      },
+      "encoding": {
+        "x": {
+          "value": 530
+        },
+        "y": {
+          "value": 95
+        },
+        "text": {
+          "value": "High Income"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "fontSize": 10
+      },
+      "encoding": {
+        "x": {
+          "value": 35
+        },
+        "y": {
+          "value": 95
+        },
+        "text": {
+          "value": "Low Income"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "fontSize": 10
+      },
+      "encoding": {
+        "x": {
+          "value": 335
+        },
+        "y": {
+          "value": 190
+        },
+        "text": {
+          "value": "Low Participation"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "fontSize": 10
+      },
+      "encoding": {
+        "x": {
+          "value": 335
+        },
+        "y": {
+          "value": 10
+        },
+        "text": {
+          "value": "High Participation"
+        }
+      }
+    }
+  ]
+}

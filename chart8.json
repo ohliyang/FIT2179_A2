@@ -1,0 +1,439 @@
+{
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "description": "Two pie charts comparing Indigenous participation (2023 vs 2024).",
+  "background": "#e7f5e7",
+  "width": 615,
+  "height": 280,
+  "autosize": "none",
+  "signals": [
+    {
+      "name": "hoverSlice",
+      "value": null,
+      "on": [
+        {
+          "events": "arc:mouseover",
+          "update": "{group: datum.Indigenous, year: datum.Year}"
+        },
+        {
+          "events": "arc:mouseout",
+          "update": "null"
+        }
+      ]
+    }
+  ],
+  "data": [
+    {
+      "name": "raw",
+      "url": "chart8_pie_chart.csv",
+      "format": {
+        "type": "csv"
+      }
+    },
+    {
+      "name": "clean",
+      "source": "raw",
+      "transform": [
+        {
+          "type": "formula",
+          "as": "value",
+          "expr": "toNumber(replace(datum.Percentage, '%',''))"
+        }
+      ]
+    },
+    {
+      "name": "data2023",
+      "source": "clean",
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "datum.Year == 2023"
+        },
+        {
+          "type": "pie",
+          "field": "value"
+        }
+      ]
+    },
+    {
+      "name": "data2024",
+      "source": "clean",
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "datum.Year == 2024"
+        },
+        {
+          "type": "pie",
+          "field": "value"
+        }
+      ]
+    }
+  ],
+  "scales": [
+    {
+      "name": "color",
+      "type": "ordinal",
+      "domain": [
+        "Indigenous",
+        "Non-Indigenous"
+      ],
+      "range": [
+        "#0077B6",
+        "#F4A261"
+      ]
+    }
+  ],
+  "marks": [
+    {
+      "type": "group",
+      "encode": {
+        "enter": {
+          "x": {
+            "value": 170
+          },
+          "y": {
+            "value": 140
+          }
+        }
+      },
+      "marks": [
+        {
+          "type": "arc",
+          "from": {
+            "data": "data2023"
+          },
+          "encode": {
+            "update": {
+              "fill": {
+                "scale": "color",
+                "field": "Indigenous"
+              },
+              "startAngle": {
+                "field": "startAngle"
+              },
+              "endAngle": {
+                "field": "endAngle"
+              },
+              "innerRadius": {
+                "value": 60
+              },
+              "outerRadius": [
+                {
+                  "test": "hoverSlice && datum.Indigenous === hoverSlice.group && datum.Year === hoverSlice.year",
+                  "value": 110
+                },
+                {
+                  "value": 100
+                }
+              ],
+              "fillOpacity": [
+                {
+                  "test": "hoverSlice === null || (datum.Indigenous === hoverSlice.group && datum.Year === hoverSlice.year)",
+                  "value": 1
+                },
+                {
+                  "value": 0.35
+                }
+              ],
+              "tooltip": {
+                "signal": "{'Group': datum.Indigenous, 'Percentage': datum.Percentage, 'Year': datum.Year}"
+              }
+            }
+          }
+        },
+        {
+          "type": "text",
+          "encode": {
+            "enter": {
+              "text": {
+                "value": [
+                  "90.08%",
+                  "Non-Indigenous"
+                ]
+              },
+              "x": {
+                "value": 0
+              },
+              "y": {
+                "value": -10
+              },
+              "align": {
+                "value": "center"
+              },
+              "baseline": {
+                "value": "middle"
+              },
+              "fontSize": {
+                "value": 13
+              },
+              "fontWeight": {
+                "value": "bold"
+              },
+              "fill": {
+                "value": "#444"
+              }
+            }
+          }
+        },
+        {
+          "type": "text",
+          "encode": {
+            "enter": {
+              "text": {
+                "value": "9.92% Indigenous"
+              },
+              "x": {
+                "value": 80
+              },
+              "y": {
+                "value": -98
+              },
+              "align": {
+                "value": "center"
+              },
+              "baseline": {
+                "value": "middle"
+              },
+              "fontSize": {
+                "value": 11
+              },
+              "fontWeight": {
+                "value": "bold"
+              },
+              "fill": {
+                "value": "#444"
+              }
+            }
+          }
+        },
+        {
+          "type": "text",
+          "encode": {
+            "enter": {
+              "text": {
+                "value": "2023"
+              },
+              "y": {
+                "value": -120
+              },
+              "align": {
+                "value": "center"
+              },
+              "fontSize": {
+                "value": 14
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "group",
+      "encode": {
+        "enter": {
+          "x": {
+            "value": 450
+          },
+          "y": {
+            "value": 140
+          }
+        }
+      },
+      "marks": [
+        {
+          "type": "arc",
+          "from": {
+            "data": "data2024"
+          },
+          "encode": {
+            "update": {
+              "fill": {
+                "scale": "color",
+                "field": "Indigenous"
+              },
+              "startAngle": {
+                "field": "startAngle"
+              },
+              "endAngle": {
+                "field": "endAngle"
+              },
+              "innerRadius": {
+                "value": 60
+              },
+              "outerRadius": [
+                {
+                  "test": "hoverSlice && datum.Indigenous === hoverSlice.group && datum.Year === hoverSlice.year",
+                  "value": 110
+                },
+                {
+                  "value": 100
+                }
+              ],
+              "fillOpacity": [
+                {
+                  "test": "hoverSlice === null || (datum.Indigenous === hoverSlice.group && datum.Year === hoverSlice.year)",
+                  "value": 1
+                },
+                {
+                  "value": 0.35
+                }
+              ],
+              "tooltip": {
+                "signal": "{'Group': datum.Indigenous, 'Percentage': datum.Percentage, 'Year': datum.Year}"
+              }
+            }
+          }
+        },
+        {
+          "type": "text",
+          "encode": {
+            "enter": {
+              "text": {
+                "value": [
+                  "94.98%",
+                  "Non-Indigenous"
+                ]
+              },
+              "x": {
+                "value": 0
+              },
+              "y": {
+                "value": -10
+              },
+              "align": {
+                "value": "center"
+              },
+              "baseline": {
+                "value": "middle"
+              },
+              "fontSize": {
+                "value": 13
+              },
+              "fontWeight": {
+                "value": "bold"
+              },
+              "fill": {
+                "value": "#444"
+              }
+            }
+          }
+        },
+        {
+          "type": "text",
+          "encode": {
+            "enter": {
+              "text": {
+                "value": "5.02% Non-Indigenous"
+              },
+              "x": {
+                "value": 80
+              },
+              "y": {
+                "value": -102
+              },
+              "align": {
+                "value": "center"
+              },
+              "baseline": {
+                "value": "middle"
+              },
+              "fontSize": {
+                "value": 11
+              },
+              "fontWeight": {
+                "value": "bold"
+              },
+              "fill": {
+                "value": "#444"
+              }
+            }
+          }
+        },
+        {
+          "type": "text",
+          "encode": {
+            "enter": {
+              "text": {
+                "value": "2024"
+              },
+              "y": {
+                "value": -120
+              },
+              "align": {
+                "value": "center"
+              },
+              "fontSize": {
+                "value": 14
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "rect",
+      "encode": {
+        "enter": {
+          "x": {
+            "value": 205
+          },
+          "x2": {
+            "value": 415
+          },
+          "y": {
+            "value": 240
+          },
+          "y2": {
+            "value": 275
+          },
+          "fill": {
+            "value": "white"
+          },
+          "fillOpacity": {
+            "value": 0.9
+          },
+          "stroke": {
+            "value": "black"
+          },
+          "strokeWidth": {
+            "value": 1.5
+          },
+          "cornerRadius": {
+            "value": 6
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "encode": {
+        "enter": {
+          "x": {
+            "value": 210
+          },
+          "y": {
+            "value": 250
+          },
+          "text": {
+            "value": [
+              "Indigenous participation remained",
+              "consistently low across both years"
+            ]
+          },
+          "baseline": {
+            "value": "middle"
+          },
+          "fontSize": {
+            "value": 12
+          },
+          "fontWeight": {
+            "value": "bold"
+          },
+          "fill": {
+            "value": "black"
+          }
+        }
+      }
+    }
+  ]
+}

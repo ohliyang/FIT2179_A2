@@ -1,0 +1,240 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "background": "#ffe4e4",
+  "width": 345,
+  "height": 150,
+  "data": {
+    "url": "chart15_stacked_bar.csv"
+  },
+  "params": [
+    {
+      "name": "sortBy",
+      "value": "type",
+      "bind": {
+        "input": "select",
+        "name": "Sort By: ",
+        "options": [
+          "total",
+          "volunteer",
+          "non_volunteer"
+        ],
+        "labels": [
+          "Total Involved",
+          "% Volunteered",
+          "% Not Volunteered"
+        ]
+      }
+    }
+  ],
+  "transform": [
+    {
+      "calculate": "toNumber(replace(datum['Percent of Involvement Volunteered'], '%',''))",
+      "as": "volunteer_pct"
+    },
+    {
+      "calculate": "100 - datum.volunteer_pct",
+      "as": "non_volunteer_pct"
+    },
+    {
+      "fold": [
+        "volunteer_pct",
+        "non_volunteer_pct"
+      ],
+      "as": [
+        "type",
+        "value"
+      ]
+    },
+    {
+      "calculate": "datum.type == 'volunteer_pct' ? 'Volunteered' : 'Not Volunteered'",
+      "as": "category"
+    },
+    {
+      "calculate": "sortBy === 'volunteer' ? datum.volunteer_pct : sortBy === 'non_volunteer' ? datum.non_volunteer_pct : datum.Involved",
+      "as": "sort_value"
+    }
+  ],
+  "encoding": {
+    "order": {
+      "field": "category",
+      "sort": "descending"
+    },
+    "y": {
+      "field": "Type_of_Non_playing_Role",
+      "type": "nominal",
+      "sort": {
+        "op": "sum",
+        "field": "sort_value",
+        "order": "descending"
+      },
+      "title": null
+    },
+    "x": {
+      "field": "value",
+      "type": "quantitative",
+      "stack": "normalize",
+      "sort": "ascending",
+      "title": "Proportion (%)"
+    },
+    "color": {
+      "field": "category",
+      "type": "nominal",
+      "scale": {
+        "domain": [
+          "Volunteered",
+          "Not Volunteered"
+        ],
+        "range": [
+          "#4e79a7",
+          "#c7c7c7"
+        ]
+      },
+      "legend": {
+        "title": null,
+        "orient": "top"
+      }
+    },
+    "opacity": {
+      "condition": {
+        "param": "hover",
+        "value": 1
+      },
+      "value": 0.25
+    }
+  },
+  "layer": [
+    {
+      "mark": "bar",
+      "params": [
+        {
+          "name": "hover",
+          "select": {
+            "type": "point",
+            "fields": [
+              "Type_of_Non_playing_Role"
+            ],
+            "on": "mouseover",
+            "clear": "mouseout"
+          }
+        }
+      ],
+      "encoding": {
+        "opacity": {
+          "condition": {
+            "param": "hover",
+            "value": 1
+          },
+          "value": 0.25
+        },
+        "tooltip": [
+          {
+            "field": "Type_of_Non_playing_Role",
+            "type": "nominal",
+            "title": "Non-playing Role"
+          },
+          {
+            "field": "category",
+            "type": "nominal",
+            "title": "Participation Type"
+          },
+          {
+            "field": "volunteer_pct",
+            "type": "quantitative",
+            "title": "% Volunteered",
+            "format": ".1f"
+          },
+          {
+            "field": "non_volunteer_pct",
+            "type": "quantitative",
+            "title": "% Not Volunteered",
+            "format": ".1f"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "fontSize": 12,
+        "fontStyle": "Arial",
+        "align": "left",
+        "dy": -10
+      },
+      "encoding": {
+        "x": {
+          "value": 345
+        },
+        "y": {
+          "value": -5
+        },
+        "text": {
+          "value": "Total Involved"
+        },
+        "color": {
+          "value": "black"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 50
+      },
+      "encoding": {
+        "x": {
+          "value": 310
+        },
+        "y": {
+          "field": "Type_of_Non_playing_Role",
+          "type": "nominal"
+        },
+        "text": {
+          "field": "Involved",
+          "type": "quantitative",
+          "format": ","
+        },
+        "color": {
+          "value": "black"
+        },
+        "opacity": {
+          "condition": {
+            "param": "hover",
+            "value": 1
+          },
+          "value": 0.05
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 50
+      },
+      "encoding": {
+        "x": {
+          "value": -40
+        },
+        "y": {
+          "field": "Type_of_Non_playing_Role",
+          "type": "nominal"
+        },
+        "text": {
+          "field": "Percent of Involvement Volunteered",
+          "type": "nominal"
+        },
+        "color": {
+          "value": "#AADDFF"
+        },
+        "opacity": {
+          "condition": {
+            "param": "hover",
+            "value": 1
+          },
+          "value": 0.25
+        }
+      }
+    }
+  ]
+}

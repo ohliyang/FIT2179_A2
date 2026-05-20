@@ -1,0 +1,206 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 565,
+  "background": "#d6e6fc",
+  "data": {
+    "url": "chart3_line_chart.csv"
+  },
+  "params": [
+    {
+      "name": "showIncrease",
+      "value": false,
+      "bind": {
+        "input": "checkbox",
+        "name": "Show Yearly Increase"
+      }
+    }
+  ],
+  "layer": [
+    {
+      "params": [
+        {
+          "name": "hover",
+          "select": {
+            "type": "point",
+            "on": "mouseover",
+            "clear": "mouseout"
+          }
+        }
+      ],
+      "mark": {
+        "type": "line",
+        "strokeWidth": 3
+      },
+      "encoding": {
+        "x": {
+          "field": "Year",
+          "type": "ordinal",
+          "axis": {
+            "labelAngle": 0
+          }
+        },
+        "y": {
+          "field": "Number of Clubs & Associations",
+          "type": "quantitative"
+        },
+        "opacity": {
+          "condition": {
+            "param": "hover",
+            "value": 1
+          },
+          "value": 0.3
+        },
+        "tooltip": [
+          {
+            "field": "Year",
+            "type": "ordinal"
+          },
+          {
+            "field": "Number of Clubs & Associations",
+            "type": "quantitative"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "dy": 10,
+        "fontSize": 11,
+        "color": "black"
+      },
+      "encoding": {
+        "x": {
+          "field": "Year",
+          "type": "ordinal"
+        },
+        "y": {
+          "field": "Number of Clubs & Associations",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "Number of Clubs & Associations"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "window": [
+            {
+              "op": "lag",
+              "field": "Number of Clubs & Associations",
+              "as": "prev"
+            }
+          ],
+          "sort": [
+            {
+              "field": "Year"
+            }
+          ]
+        },
+        {
+          "calculate": "datum.prev == null ? null : datum['Number of Clubs & Associations'] - datum.prev",
+          "as": "increase"
+        },
+        {
+          "filter": "datum.increase != null"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "dx": -40,
+        "dy": -10,
+        "fontSize": 11,
+        "fontWeight": "bold",
+        "color": "darkgreen"
+      },
+      "encoding": {
+        "x": {
+          "field": "Year",
+          "type": "ordinal"
+        },
+        "y": {
+          "field": "Number of Clubs & Associations",
+          "type": "quantitative"
+        },
+        "text": {
+          "condition": {
+            "param": "showIncrease",
+            "field": "increase",
+            "format": "+.0f"
+          },
+          "value": ""
+        },
+        "opacity": {
+          "condition": {
+            "param": "showIncrease",
+            "value": 1
+          },
+          "value": 0
+        }
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {}
+        ]
+      },
+      "mark": {
+        "type": "rect",
+        "fill": "#ffffff",
+        "stroke": "#4e79a7",
+        "cornerRadius": 8,
+        "opacity": 0.9
+      },
+      "encoding": {
+        "x": {
+          "value": 170
+        },
+        "x2": {
+          "value": 540
+        },
+        "y": {
+          "value": 110
+        },
+        "y2": {
+          "value": 140
+        }
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "text": "Continuous growth in clubs & associations from 2021 to 2024",
+            "x": "2021",
+            "y": 130
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "fontSize": 12,
+        "fontWeight": "bold",
+        "color": "#000000",
+        "align": "left",
+        "dx": 10,
+        "dy": -10
+      },
+      "encoding": {
+        "x": {
+          "field": "x",
+          "type": "ordinal"
+        },
+        "y": {
+          "field": "y",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "text"
+        }
+      }
+    }
+  ]
+}

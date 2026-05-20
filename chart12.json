@@ -1,0 +1,250 @@
+{
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "title": {
+    "text": "Ways of Participation"
+  },
+  "description": "Treemap of participation by type.",
+  "background": "#fff2d5",
+  "width": 600,
+  "height": 290,
+  "padding": 2.5,
+  "autosize": "none",
+  "signals": [
+    {
+      "name": "aspectRatio",
+      "value": 1.6,
+      "bind": {
+        "input": "range",
+        "min": 1,
+        "max": 5,
+        "step": 0.1
+      }
+    }
+  ],
+  "data": [
+    {
+      "name": "raw",
+      "url": "chart12_tree_map.csv",
+      "format": {
+        "type": "csv"
+      },
+      "transform": [
+        {
+          "type": "formula",
+          "as": "Estimate",
+          "expr": "toNumber(replace(datum.Estimate, ',', ''))"
+        }
+      ]
+    },
+    {
+      "name": "treeData",
+      "transform": [
+        {
+          "type": "sequence",
+          "start": 0,
+          "stop": 1
+        },
+        {
+          "type": "formula",
+          "as": "id",
+          "expr": "'Participation'"
+        },
+        {
+          "type": "formula",
+          "as": "parent",
+          "expr": "null"
+        }
+      ]
+    },
+    {
+      "name": "combined",
+      "source": "raw",
+      "transform": [
+        {
+          "type": "formula",
+          "as": "id",
+          "expr": "datum['Ways of participation']"
+        },
+        {
+          "type": "formula",
+          "as": "parent",
+          "expr": "'Participation'"
+        }
+      ]
+    },
+    {
+      "name": "tree",
+      "source": [
+        "treeData",
+        "combined"
+      ],
+      "transform": [
+        {
+          "type": "stratify",
+          "key": "id",
+          "parentKey": "parent"
+        },
+        {
+          "type": "treemap",
+          "field": "Estimate",
+          "sort": {
+            "field": "value",
+            "order": "descending"
+          },
+          "round": true,
+          "ratio": {
+            "signal": "aspectRatio"
+          },
+          "size": [
+            {
+              "signal": "width"
+            },
+            {
+              "signal": "height"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "nodes",
+      "source": "tree",
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "datum.children"
+        }
+      ]
+    },
+    {
+      "name": "leaves",
+      "source": "tree",
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "!datum.children"
+        }
+      ]
+    }
+  ],
+  "scales": [
+    {
+      "name": "color",
+      "type": "linear",
+      "domain": {
+        "data": "leaves",
+        "field": "Rate"
+      },
+      "range": [
+        "#fff3e0",
+        "#e65100"
+      ],
+      "nice": true
+    }
+  ],
+  "marks": [
+    {
+      "type": "rect",
+      "from": {
+        "data": "nodes"
+      },
+      "interactive": false,
+      "encode": {
+        "enter": {
+          "stroke": {
+            "value": "#fff"
+          },
+          "fill": {
+            "scale": "color",
+            "field": "Rate"
+          }
+        },
+        "update": {
+          "x": {
+            "field": "x0"
+          },
+          "y": {
+            "field": "y0"
+          },
+          "x2": {
+            "field": "x1"
+          },
+          "y2": {
+            "field": "y1"
+          }
+        }
+      }
+    },
+    {
+      "type": "rect",
+      "from": {
+        "data": "leaves"
+      },
+      "encode": {
+        "enter": {
+          "stroke": {
+            "value": "#fff"
+          },
+          "fill": {
+            "scale": "color",
+            "field": "Rate"
+          },
+          "tooltip": {
+            "signal": "datum.id"
+          }
+        },
+        "update": {
+          "x": {
+            "field": "x0"
+          },
+          "y": {
+            "field": "y0"
+          },
+          "x2": {
+            "field": "x1"
+          },
+          "y2": {
+            "field": "y1"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "from": {
+        "data": "leaves"
+      },
+      "interactive": false,
+      "encode": {
+        "enter": {
+          "font": {
+            "value": "Arial"
+          },
+          "align": {
+            "value": "left"
+          },
+          "baseline": {
+            "value": "top"
+          },
+          "fill": {
+            "value": "black"
+          },
+          "text": {
+            "signal": "split(datum.id, '  ')"
+          },
+          "fontSize": {
+            "signal": "clamp(min((datum.x1 - datum.x0), (datum.y1 - datum.y0)) / 10, 8, 18)"
+          }
+        },
+        "update": {
+          "x": {
+            "signal": "datum.x0 + 6"
+          },
+          "y": {
+            "signal": "datum.y0 + 14"
+          }
+        }
+      }
+    }
+  ]
+}

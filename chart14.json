@@ -1,0 +1,210 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "background": "#ffe4e4",
+  "width": 490,
+  "height": 200,
+  "data": {
+    "url": "chart14_grouped_bar.csv"
+  },
+  "transform": [
+    {
+      "calculate": "toNumber(replace(datum['Percent of Participants'], '%',''))",
+      "as": "percent"
+    }
+  ],
+  "layer": [
+    {
+      "mark": {
+        "type": "bar",
+        "size": 30,
+        "cornerRadiusEnd": 5
+      },
+      "params": [
+        {
+          "name": "hoverGender",
+          "select": {
+            "type": "point",
+            "fields": [
+              "Gender",
+              "Year"
+            ],
+            "on": "mouseover",
+            "clear": "mouseout"
+          }
+        }
+      ],
+      "encoding": {
+        "y": {
+          "field": "Year",
+          "type": "ordinal",
+          "title": "Year",
+          "axis": {
+            "labelAngle": 0
+          }
+        },
+        "x": {
+          "field": "percent",
+          "type": "quantitative",
+          "title": "Injury Rate (%)",
+          "axis": {
+            "grid": false
+          }
+        },
+        "yOffset": {
+          "field": "Gender"
+        },
+        "color": {
+          "field": "Gender",
+          "type": "nominal",
+          "scale": {
+            "domain": [
+              "Male",
+              "Female"
+            ],
+            "range": [
+              "#0072B2",
+              "#D55E00"
+            ]
+          },
+          "legend": {
+            "title": "Gender"
+          }
+        },
+        "opacity": {
+          "condition": {
+            "param": "hoverGender",
+            "value": 1
+          },
+          "value": 0.25
+        },
+        "tooltip": [
+          {
+            "field": "Gender",
+            "type": "nominal"
+          },
+          {
+            "field": "Year",
+            "type": "ordinal"
+          },
+          {
+            "field": "percent",
+            "type": "quantitative",
+            "title": "Injury Rate (%)",
+            "format": ".1f"
+          }
+        ],
+        "size": {
+          "condition": {
+            "param": "hoverGender",
+            "empty": false,
+            "value": 40
+          },
+          "value": 20
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "dy": 0,
+        "dx": 10,
+        "fontSize": 11
+      },
+      "encoding": {
+        "y": {
+          "field": "Year",
+          "type": "ordinal"
+        },
+        "x": {
+          "field": "percent",
+          "type": "quantitative"
+        },
+        "yOffset": {
+          "field": "Gender"
+        },
+        "text": {
+          "field": "percent",
+          "type": "quantitative",
+          "format": ".1f"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "rule",
+        "strokeDash": [
+          4,
+          4
+        ],
+        "color": "black"
+      },
+      "encoding": {
+        "x": {
+          "datum": 7.225
+        }
+      }
+    },
+    {
+  "mark": {
+    "type": "text",
+    "fontSize": 11,
+    "fontWeight": "bold",
+    "align": "left",
+    "dx": 5,
+    "dy": 180,
+    "color": "black"
+  },
+  "encoding": {
+    "x": {
+      "datum": 7.225
+    },
+    "y": {
+      "value": 10
+    },
+    "text": {
+      "value": "Average"
+    }
+  }
+},
+{
+  "mark": {
+    "type": "rect",
+    "cornerRadius": 5,
+    "stroke": "#999",
+    "fill": "#ffffff",
+    "opacity": 0.9
+  },
+  "encoding": {
+    "x": {
+      "value": 410
+    },
+    "x2": {
+      "value": 560
+    },
+    "y": {
+      "value": 100
+    },
+    "y2": {
+      "value": 165
+    }
+  }
+},
+{
+  "mark": {
+    "type": "text",
+    "align": "left",
+    "baseline": "top",
+    "fontSize": 12,
+    "lineBreak": "\n",
+    "dx": 170,
+    "dy": 5,
+    "color": "black"
+  },
+  "encoding": {
+    "text": {
+      "value": "Male participants recorded\nhigher injury rates than\nfemale participants in\nboth years."
+    }
+  }
+}
+  ]
+}

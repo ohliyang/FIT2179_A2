@@ -1,0 +1,420 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 493,
+  "height": {
+    "step": 30
+  },
+  "background": "#d6e6fc",
+  "data": {
+    "url": "chart2_comet_chart.csv"
+  },
+  "datasets": {
+    "annotation_box": [
+      {
+        "sort": "change",
+        "text": [
+          "SA recorded the largest",
+          "change in participation",
+          "between 2023 and 2024"
+        ],
+        "x": 2,
+        "y": 6
+      },
+      {
+        "sort": "increase",
+        "text": [
+          "QLD recorded the largest",
+          "increase in participation",
+          "between 2023 and 2024"
+        ],
+        "x": 2,
+        "y": 6
+      },
+      {
+        "sort": "decrease",
+        "text": [
+          "SA recorded the largest",
+          "decrease in participation",
+          "between 2023 and 2024"
+        ],
+        "x": 2,
+        "y": 6
+      },
+      {
+        "sort": "2023",
+        "text": [
+          "ACT recorded the highest",
+          "participation in both 2023",
+          "and 2024"
+        ],
+        "x": 2,
+        "y": 6
+      },
+      {
+        "sort": "2024",
+        "text": [
+          "ACT recorded the highest",
+          "participation in both 2023",
+          "and 2024"
+        ],
+        "x": 2,
+        "y": 6
+      }
+    ]
+  },
+  "params": [
+    {
+      "name": "sortBy",
+      "value": "change",
+      "bind": {
+        "input": "select",
+        "name": "Sort By: ",
+        "options": [
+          "change",
+          "increase",
+          "decrease",
+          "2024",
+          "2023"
+        ],
+        "labels": [
+          "Largest Change",
+          "Largest Increase",
+          "Largest Decrease",
+          "2024 Rate",
+          "2023 Rate"
+        ]
+      }
+    }
+  ],
+  "transform": [
+    {
+      "calculate": "toNumber(replace(datum['Participation Rate'], '%',''))",
+      "as": "rate"
+    },
+    {
+      "pivot": "Year",
+      "value": "rate",
+      "groupby": [
+        "State"
+      ]
+    },
+    {
+      "calculate": "abs(datum['2024'] - datum['2023'])",
+      "as": "change"
+    },
+    {
+      "calculate": "datum['2024'] - datum['2023']",
+      "as": "increase"
+    },
+    {
+      "calculate": "datum['2023'] - datum['2024']",
+      "as": "decrease"
+    },
+    {
+      "calculate": "min(datum['2023'], datum['2024'])",
+      "as": "min_rate"
+    },
+    {
+      "calculate": "max(datum['2023'], datum['2024'])",
+      "as": "max_rate"
+    },
+    {
+      "calculate": "sortBy === '2023' ? datum['2023'] : sortBy === '2024' ? datum['2024'] : sortBy === 'increase' ? datum.increase : sortBy === 'decrease' ? datum.decrease : datum.change",
+      "as": "sort_value"
+    },
+    {
+      "fold": [
+        "2023",
+        "2024"
+      ],
+      "as": [
+        "Year",
+        "rate"
+      ]
+    }
+  ],
+  "encoding": {
+    "y": {
+      "field": "State",
+      "type": "nominal",
+      "sort": {
+        "field": "sort_value",
+        "order": "descending"
+      },
+      "title": "State"
+    }
+  },
+  "layer": [
+    {
+      "params": [
+        {
+          "name": "hoverState",
+          "select": {
+            "type": "point",
+            "fields": [
+              "State"
+            ],
+            "on": "mouseover",
+            "clear": "mouseout"
+          }
+        }
+      ],
+      "mark": {
+        "type": "trail",
+        "opacity": 0.85
+      },
+      "encoding": {
+        "x": {
+          "field": "rate",
+          "type": "quantitative",
+          "title": "Participation Rate (%)",
+          "scale": {
+            "domain": [
+              0.8,
+              2.9
+            ]
+          }
+        },
+        "detail": {
+          "field": "State"
+        },
+        "size": {
+          "field": "Year",
+          "type": "ordinal",
+          "scale": {
+            "domain": [
+              "2023",
+              "2024"
+            ],
+            "range": [
+              1,
+              10
+            ]
+          },
+          "legend": {
+            "title": "Year",
+            "symbolType": "circle",
+            "offset": -10
+          }
+        },
+        "color": {
+          "value": "#4e79a7"
+        },
+        "opacity": {
+          "condition": {
+            "param": "hoverState",
+            "value": 1
+          },
+          "value": 0.25
+        },
+        "tooltip": [
+          {
+            "field": "State",
+            "type": "nominal"
+          },
+          {
+            "field": "Year",
+            "type": "ordinal"
+          },
+          {
+            "field": "rate",
+            "type": "quantitative",
+            "format": ".2f",
+            "title": "Participation Rate (%)"
+          }
+        ]
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.rate == datum.min_rate"
+        }
+      ],
+      "params": [
+        {
+          "name": "hover2",
+          "select": {
+            "type": "point",
+            "fields": [
+              "State"
+            ],
+            "on": "mouseover",
+            "clear": "mouseout"
+          }
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "right",
+        "dx": -7,
+        "dy": 1,
+        "baseline": "middle",
+        "fontSize": 11
+      },
+      "encoding": {
+        "x": {
+          "field": "rate",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "rate",
+          "format": ".1f"
+        },
+        "color": {
+          "value": "#4e79a7"
+        },
+        "opacity": {
+          "condition": {
+            "param": "hover2",
+            "value": 1
+          },
+          "value": 0.25
+        },
+        "tooltip": [
+          {
+            "field": "State",
+            "type": "nominal"
+          },
+          {
+            "field": "Year",
+            "type": "ordinal"
+          },
+          {
+            "field": "rate",
+            "type": "quantitative",
+            "format": ".2f",
+            "title": "Participation Rate (%)"
+          }
+        ]
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.rate == datum.max_rate"
+        }
+      ],
+      "params": [
+        {
+          "name": "hover3",
+          "select": {
+            "type": "point",
+            "fields": [
+              "State"
+            ],
+            "on": "mouseover",
+            "clear": "mouseout"
+          }
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 7,
+        "dy": 1,
+        "baseline": "middle",
+        "fontSize": 11,
+        "fontWeight": "bold"
+      },
+      "encoding": {
+        "x": {
+          "field": "rate",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "rate",
+          "format": ".1f"
+        },
+        "color": {
+          "value": "#1f3b73"
+        },
+        "opacity": {
+          "condition": {
+            "param": "hover3",
+            "value": 1
+          },
+          "value": 0.25
+        },
+        "tooltip": [
+          {
+            "field": "State",
+            "type": "nominal"
+          },
+          {
+            "field": "Year",
+            "type": "ordinal"
+          },
+          {
+            "field": "rate",
+            "type": "quantitative",
+            "format": ".2f",
+            "title": "Participation Rate (%)"
+          }
+        ]
+      }
+    },
+    {
+      "data": {
+        "name": "annotation_box"
+      },
+      "transform": [
+        {
+          "filter": "datum.sort == sortBy"
+        }
+      ],
+      "mark": {
+        "type": "rect",
+        "fill": "#ffffff",
+        "stroke": "#4e79a7",
+        "cornerRadius": 8,
+        "opacity": 0.9
+      },
+      "encoding": {
+        "x": {
+          "value": 390
+        },
+        "x2": {
+          "value": 550
+        },
+        "y": {
+          "value": 90
+        },
+        "y2": {
+          "value": 150
+        }
+      }
+    },
+    {
+      "data": {
+        "name": "annotation_box"
+      },
+      "transform": [
+        {
+          "filter": "datum.sort == sortBy"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "top",
+        "fontSize": 12,
+        "fontWeight": "bold",
+        "dx": 410,
+        "dy": 90,
+        "lineBreak": "\n"
+      },
+      "encoding": {
+        "text": {
+          "field": "text"
+        },
+        "x": {
+          "value": -13
+        },
+        "y": {
+          "value": 10
+        }
+      }
+    }
+  ]
+}
