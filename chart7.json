@@ -2,7 +2,7 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "title": "Participation Rate vs Household Income",
   "background": "#e7f5e7",
-  "width": 565,
+  "width": 535,
   "height": 195,
   "data": {
     "url": "chart7_scatterplot.csv"
@@ -115,7 +115,7 @@
       },
       "encoding": {
         "x": {
-          "value": 530
+          "value": 500
         },
         "y": {
           "value": 95
@@ -132,7 +132,7 @@
       },
       "encoding": {
         "x": {
-          "value": 35
+          "value": 30
         },
         "y": {
           "value": 95
@@ -149,7 +149,7 @@
       },
       "encoding": {
         "x": {
-          "value": 335
+          "value": 325
         },
         "y": {
           "value": 190
@@ -166,7 +166,7 @@
       },
       "encoding": {
         "x": {
-          "value": 335
+          "value": 325
         },
         "y": {
           "value": 10

@@ -2,13 +2,12 @@
   "$schema": "https://vega.github.io/schema/vega/v5.json",
   "description": "Diverging bar chart of participation by state and gender.",
   "background": "#e7f5e7",
-  "width": 800,
   "height": 200,
   "padding": 5,
   "signals": [
     {
       "name": "chartWidth",
-      "value": 277
+      "value": 263
     },
     {
       "name": "chartPad",

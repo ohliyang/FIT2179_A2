@@ -2,7 +2,7 @@
   "$schema": "https://vega.github.io/schema/vega/v5.json",
   "background": "#fff2d5",
   "height": 300,
-  "width": 485,
+  "width": 460,
   "data": [
     {
       "name": "rawData",

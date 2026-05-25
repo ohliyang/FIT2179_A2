@@ -1,6 +1,6 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "width": 565,
+  "width": 545,
   "background": "#d6e6fc",
   "data": {
     "url": "chart3_line_chart.csv"

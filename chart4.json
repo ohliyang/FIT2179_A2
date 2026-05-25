@@ -5,7 +5,7 @@
       "stroke": ""
     }
   },
-  "width": 440,
+  "width": 415,
   "height": 185,
   "background": "#e7f5e7",
   "title": {
@@ -443,7 +443,7 @@
           "type": "nominal"
         },
         "x": {
-          "value": 450
+          "value": 430
         },
         "text": {
           "condition": [
@@ -478,10 +478,10 @@
       },
       "encoding": {
         "x": {
-          "value": 340
+          "value": 320
         },
         "x2": {
-          "value": 455
+          "value": 435
         },
         "y": {
           "value": 25
@@ -503,7 +503,7 @@
         "baseline": "top",
         "fontSize": 10,
         "fontWeight": "bold",
-        "dx": 410,
+        "dx": 390,
         "dy": 90,
         "lineBreak": "\n"
       },

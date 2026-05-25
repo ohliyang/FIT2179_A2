@@ -1,7 +1,7 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "width": 1100,
-  "height": 700,
+  "width": 1080,
+  "height": 750,
   "config": {
     "view": {
       "stroke": null
@@ -43,60 +43,25 @@
   "datasets": {
     "annotations": [
       {
-        "state": "WA",
-        "x1": 103,
-        "x2": 112,
-        "y1": -26.7,
-        "y2": -29.4
-      },
-      {
-        "state": "QLD",
-        "x1": 148.5,
-        "x2": 157.5,
-        "y1": -16.5,
-        "y2": -20
-      },
-      {
-        "state": "TAS",
-        "x1": 150.7,
-        "x2": 160.4,
-        "y1": -41.5,
-        "y2": -43.2
-      },
-      {
-        "state": "SA",
-        "x1": 125.5,
-        "x2": 134,
-        "y1": -34,
-        "y2": -35.8
-      },
-      {
         "state": "VIC",
         "x1": 126.4,
-        "x2": 139,
+        "x2": 139.2,
         "y1": -40,
-        "y2": -41.8
-      },
-      {
-        "state": "NT",
-        "x1": 108.2,
-        "x2": 121,
-        "y1": -12.5,
-        "y2": -15
+        "y2": -42.1
       },
       {
         "state": "NSW",
-        "x1": 153.5,
-        "x2": 161.5,
-        "y1": -26.8,
-        "y2": -30
+        "x1": 154.5,
+        "x2": 162.8,
+        "y1": -26.9,
+        "y2": -30.2
       },
       {
         "state": "ACT",
-        "x1": 152.7,
-        "x2": 159.8,
+        "x1": 153.7,
+        "x2": 161,
         "y1": -34,
-        "y2": -37
+        "y2": -37.2
       }
     ]
   },
@@ -286,14 +251,78 @@
     },
     {
       "data": {
-        "url": "chart1_map_data1.csv"
+    "values": [
+      {
+        "State Symbol": "WA",
+        "lon": 122,
+        "lat": -25,
+        "Estimate": 35000,
+        "dx": 0,
+        "dy": 0
       },
+      {
+        "State Symbol": "NT",
+        "lon": 133,
+        "lat": -18,
+        "Estimate": 4000,
+        "dx": 0,
+        "dy": -18
+      },
+      {
+        "State Symbol": "SA",
+        "lon": 136,
+        "lat": -29,
+        "Estimate": 18000,
+        "dx": 0,
+        "dy": 18
+      },
+      {
+        "State Symbol": "QLD",
+        "lon": 145,
+        "lat": -22,
+        "Estimate": 72000,
+        "dx": 0,
+        "dy": 0
+      },
+      {
+        "State Symbol": "NSW",
+        "lon": 147,
+        "lat": -32,
+        "Estimate": 138000,
+        "dx": 0,
+        "dy": 0
+      },
+      {
+        "State Symbol": "ACT",
+        "lon": 149,
+        "lat": -34.7,
+        "Estimate": 8000,
+        "dx": 0,
+        "dy": -18
+      },
+      {
+        "State Symbol": "VIC",
+        "lon": 145,
+        "lat": -37,
+        "Estimate": 125000,
+        "dx": 0,
+        "dy": 0
+      },
+      {
+        "State Symbol": "TAS",
+        "lon": 146.6,
+        "lat": -42.7,
+        "Estimate": 6000,
+        "dx": 0,
+        "dy": 18
+      }
+    ]
+  },
       "mark": {
         "type": "text",
-        "fontSize": 9,
+        "fontSize": 10,
         "fontWeight": "bold",
-        "color": "black",
-        "dy": 0
+        "color": "black"
       },
       "encoding": {
         "longitude": {
@@ -319,45 +348,17 @@
       "data": {
         "values": [
           {
-            "state": "WA",
-            "lon": 117,
-            "lat": -27,
-            "labelLon": 112,
-            "labelLat": -28
-          },
-          {
-            "state": "NT",
-            "lon": 131,
-            "lat": -15,
-            "labelLon": 121,
-            "labelLat": -14
-          },
-          {
-            "state": "QLD",
-            "lon": 146,
-            "lat": -21,
-            "labelLon": 148.5,
-            "labelLat": -19
-          },
-          {
-            "state": "SA",
-            "lon": 132,
-            "lat": -31,
-            "labelLon": 131,
-            "labelLat": -34
-          },
-          {
             "state": "NSW",
             "lon": 150,
             "lat": -30,
-            "labelLon": 153.5,
+            "labelLon": 154.5,
             "labelLat": -29
           },
           {
             "state": "VIC",
             "lon": 142,
             "lat": -37,
-            "labelLon": 139,
+            "labelLon": 139.2,
             "labelLat": -41
           }
         ]
@@ -432,7 +433,7 @@
               "2.5% despite small",
               "population"
             ],
-            "x": 152,
+            "x": 153,
             "y": -35.5
           },
           {
@@ -442,7 +443,7 @@
               "with nearly 138,000",
               "participants"
             ],
-            "x": 153,
+            "x": 154,
             "y": -28.5
           },
           {
@@ -452,54 +453,12 @@
             ],
             "x": 126,
             "y": -41.5
-          },
-          {
-            "text": [
-              "QLD has large population",
-              "but comparatively lower",
-              "participation rate"
-            ],
-            "x": 148,
-            "y": -18.5
-          },
-          {
-            "text": [
-              "WA participation remains",
-              "relatively strong outside",
-              "eastern states"
-            ],
-            "x": 102.5,
-            "y": -28.5
-          },
-          {
-            "text": [
-              "SA has participation rate",
-              "below national leaders"
-            ],
-            "x": 125,
-            "y": -35.5
-          },
-          {
-            "text": [
-              "TAS has smaller but",
-              "stable badminton community"
-            ],
-            "x": 150,
-            "y": -43
-          },
-          {
-            "text": [
-              "NT has low participation volume",
-              "due to sparse population distribution"
-            ],
-            "x": 108,
-            "y": -14.5
           }
         ]
       },
       "mark": {
         "type": "text",
-        "fontSize": 11,
+        "fontSize": 13,
         "fontWeight": "bold",
         "align": "left",
         "dx": 20,

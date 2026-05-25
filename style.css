@@ -29,7 +29,7 @@ header {
 .header-icon {
     font-size: 15px;
     line-height: 1;
-    margin-left: 10px;
+    margin-left: 40px;
 }
 
 .header-text h1 {
@@ -72,7 +72,7 @@ header {
     display: flex;
     gap: 12px;
     flex-wrap: wrap;
-    margin-right: 50px;
+    margin-right: 80px;
 }
 
 .nav-button {
@@ -108,17 +108,21 @@ header {
 
 .dashboard-table {
     width: 1920px;
-    border-collapse: collapse;
-    table-layout: fixed;
+    border-collapse: separate;
+    border-spacing: 20px 20px; /* vertical gaps between sections */
+    width: 1920px;
     margin: 0 auto;
+    table-layout: fixed;
 }
 
 .dashboard-table td {
-    border: 1px solid #d0d7de;
+    border: none;
     vertical-align: top;
     padding: 12px;
     height: 25px;
 }
+
+
 
 td {
     border: 1px solid #d0d7de;
@@ -175,7 +179,8 @@ td {
 
 .story {
     font-size: 20px;
-    margin-top: 20px;
+    margin-top: 25px;
+    text-align: justify;
     color: #444;
     line-height: 1.2;
     font-family: "Source Sans 3", sans-serif;
@@ -207,28 +212,32 @@ td {
 }
 
 #chart1 {
-    font-size: 24px;
+    font-size: 30px;
 }
 
 /* Category colouring (optional) */
 .cat1 {
     background: #eaf3ff;
     outline: 0.5px solid #4a90e2;
+    border-radius: 24px;
 }
 
 .cat2 {
     background: #f3f9f3;
     outline: 0.5px solid #58a55c;
+    border-radius: 24px;
 }
 
 .cat3 {
     background: #fff7e6;
     outline: 0.5px solid #d9a441;
+    border-radius: 24px;
 }
 
 .cat4 {
     background: #fff0f0;
     outline: 0.5px solid #d46a6a;
+    border-radius: 24px;
 }
 
 
@@ -236,43 +245,28 @@ td {
 .section1-heading {
     background: #4a90e2;
     color: white;
+    border-radius: 24px;
 }
 
 .section2-heading {
     background: #58a55c;
     color: white;
+    border-radius: 24px;
 }
 
 .section3-heading {
     background: #d9a441;
     color: white;
+    border-radius: 24px;
 }
 
 .section4-heading {
     background: #d46a6a;
     color: white;
+    border-radius: 24px;
 }
 
-.section1-border {
-    border-left: 3px solid #4a90e2;
-    border-right: 3px solid #4a90e2;
-}
 
-.section2-border {
-    border-left: 3px solid #58a55c;
-    border-right: 3px solid #58a55c;
-}
-
-.section3-border {
-    border-left: 3px solid #d9a441;
-    border-right: 3px solid #d9a441;
-}
-
-.section4-border {
-    border-left: 3px solid #d46a6a;
-    border-right: 3px solid #d46a6a;
-    border-bottom: 3px solid #d46a6a;
-}
 
 
 
@@ -390,7 +384,7 @@ footer {
 .footer-main-icon {
     font-size: 85px;
     line-height: 1;
-    margin-left: 20px;
+    margin-left: 40px;
     margin-right: 10px;
 }
 
@@ -427,7 +421,7 @@ footer {
     gap: 18px;
     flex-wrap: wrap;
     margin-left: 20px;
-    margin-right: 50px;
+    margin-right: 70px;
 }
 
 .footer-box {

@@ -1,8 +1,8 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "background": "#ffe4e4",
-  "width": 345,
-  "height": 150,
+  "width": 325,
+  "height": 155,
   "data": {
     "url": "chart15_stacked_bar.csv"
   },
@@ -162,7 +162,7 @@
       },
       "encoding": {
         "x": {
-          "value": 345
+          "value": 325
         },
         "y": {
           "value": -5
@@ -183,7 +183,7 @@
       },
       "encoding": {
         "x": {
-          "value": 310
+          "value": 290
         },
         "y": {
           "field": "Type_of_Non_playing_Role",

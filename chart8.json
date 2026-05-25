@@ -2,7 +2,7 @@
   "$schema": "https://vega.github.io/schema/vega/v5.json",
   "description": "Two pie charts comparing Indigenous participation (2023 vs 2024).",
   "background": "#e7f5e7",
-  "width": 615,
+  "width": 590,
   "height": 280,
   "autosize": "none",
   "signals": [
@@ -323,7 +323,7 @@
           "encode": {
             "enter": {
               "text": {
-                "value": "5.02% Non-Indigenous"
+                "value": "5.02% Indigenous"
               },
               "x": {
                 "value": 80

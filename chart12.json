@@ -5,7 +5,7 @@
   },
   "description": "Treemap of participation by type.",
   "background": "#fff2d5",
-  "width": 600,
+  "width": 585,
   "height": 290,
   "padding": 2.5,
   "autosize": "none",
