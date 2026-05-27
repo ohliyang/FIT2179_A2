@@ -145,66 +145,66 @@
       }
     },
     {
-  "mark": {
-    "type": "text",
-    "fontSize": 11,
-    "fontWeight": "bold",
-    "align": "left",
-    "dx": 5,
-    "dy": 180,
-    "color": "black"
-  },
-  "encoding": {
-    "x": {
-      "datum": 7.225
+      "mark": {
+        "type": "text",
+        "fontSize": 11,
+        "fontWeight": "bold",
+        "align": "left",
+        "dx": 5,
+        "dy": 180,
+        "color": "black"
+      },
+      "encoding": {
+        "x": {
+          "datum": 7.225
+        },
+        "y": {
+          "value": 10
+        },
+        "text": {
+          "value": "Average"
+        }
+      }
     },
-    "y": {
-      "value": 10
+    {
+      "mark": {
+        "type": "rect",
+        "cornerRadius": 5,
+        "stroke": "#999",
+        "fill": "#ffffff",
+        "opacity": 0.9
+      },
+      "encoding": {
+        "x": {
+          "value": 385
+        },
+        "x2": {
+          "value": 535
+        },
+        "y": {
+          "value": 100
+        },
+        "y2": {
+          "value": 165
+        }
+      }
     },
-    "text": {
-      "value": "Average"
+    {
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "top",
+        "fontSize": 12,
+        "lineBreak": "\n",
+        "dx": 155,
+        "dy": 5,
+        "color": "black"
+      },
+      "encoding": {
+        "text": {
+          "value": "Male participants recorded\nhigher injury rates than\nfemale participants in\nboth years."
+        }
+      }
     }
-  }
-},
-{
-  "mark": {
-    "type": "rect",
-    "cornerRadius": 5,
-    "stroke": "#999",
-    "fill": "#ffffff",
-    "opacity": 0.9
-  },
-  "encoding": {
-    "x": {
-      "value": 385
-    },
-    "x2": {
-      "value": 535
-    },
-    "y": {
-      "value": 100
-    },
-    "y2": {
-      "value": 165
-    }
-  }
-},
-{
-  "mark": {
-    "type": "text",
-    "align": "left",
-    "baseline": "top",
-    "fontSize": 12,
-    "lineBreak": "\n",
-    "dx": 155,
-    "dy": 5,
-    "color": "black"
-  },
-  "encoding": {
-    "text": {
-      "value": "Male participants recorded\nhigher injury rates than\nfemale participants in\nboth years."
-    }
-  }
-}
   ]
 }

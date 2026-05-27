@@ -1,9 +1,8 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "title": "Participation Rate vs Household Income",
   "background": "#e7f5e7",
   "width": 535,
-  "height": 195,
+  "height": 210,
   "data": {
     "url": "chart7_scatterplot.csv"
   },

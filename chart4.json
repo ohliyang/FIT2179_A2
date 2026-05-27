@@ -509,7 +509,11 @@
       },
       "encoding": {
         "text": {
-          "value": ["Female participation", "remained the same", "for both years"]
+          "value": [
+            "Female participation",
+            "remained the same",
+            "for both years"
+          ]
         },
         "x": {
           "value": -60

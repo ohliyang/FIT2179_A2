@@ -1,6 +1,5 @@
 {
   "$schema": "https://vega.github.io/schema/vega/v5.json",
-  "description": "Diverging bar chart of participation by state and gender.",
   "background": "#e7f5e7",
   "height": 200,
   "padding": 5,
@@ -474,7 +473,11 @@
             "value": 140
           },
           "text": {
-            "value": ["NSW has the largest male", "participation count in both", "2023 and 2024"]
+            "value": [
+              "NSW has the largest male",
+              "participation count in both",
+              "2023 and 2024"
+            ]
           },
           "baseline": {
             "value": "middle"
@@ -536,7 +539,11 @@
             "value": 140
           },
           "text": {
-            "value": ["Female dominance in NSW", "and VIC reduced significantly", "from 2023 to 2024"]
+            "value": [
+              "Female dominance in NSW",
+              "and VIC reduced significantly",
+              "from 2023 to 2024"
+            ]
           },
           "baseline": {
             "value": "middle"

@@ -3,7 +3,6 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Badminton in Australia - Data Visualisation</title>
     <link rel="stylesheet" href="style.css">
 
     <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
@@ -52,32 +51,24 @@
 
         <table class="dashboard-table">
 
-
             <tbody id="overview-section" class="section-box section1-border">
-                <!-- ROW 1 (FULL WIDTH HEADER VISUAL SUMMARY) -->
                 <tr>
                     <td colspan="3" class="full-span section1-heading">
-
                         <div class="section-header-row">
-
                             <div>
                                 <div class="section-title">OVERVIEW: The Big Picture</div>
-
                                 <div class="section-subtitle">
                                     This section explores national participation patterns, geographic distribution, and
                                     the growth of badminton infrastructure across Australia
                                 </div>
                             </div>
-
                             <div class="section-buttons">
                                 <a href="#top" class="top-button">↑ Top</a>
                             </div>
-
                         </div>
                     </td>
                 </tr>
 
-                <!-- ROW 2 -->
                 <tr>
                     <td colspan="2" rowspan="2" class="cat1">
                         <div class="chart-title">Badminton Participation Across Australia (2024)</div>
@@ -107,7 +98,6 @@
                     </td>
                 </tr>
 
-                <!-- ROW 3 -->
                 <tr>
                     <td class="cat1">
                         <div class="chart-title">Growth of Badminton Clubs and Associations</div>
@@ -128,28 +118,23 @@
                 <tr>
                     <td colspan="3" class="full-span section2-heading">
                         <div class="section-header-row">
-
                             <div>
                                 <div class="section-title">
                                     WHO: Understanding the Participants
                                 </div>
-
                                 <div class="section-subtitle">
                                     This section explores who participates in badminton across demographics, income,
                                     employment, and social backgrounds
                                 </div>
                             </div>
-
                             <div class="section-buttons">
                                 <a href="#overview-section" class="top-button">← Prev</a>
                                 <a href="#top" class="top-button">↑ Top</a>
                             </div>
-
                         </div>
                     </td>
                 </tr>
 
-                <!-- ROW 4 -->
                 <tr>
                     <td class="cat2">
                         <div class="chart-title">Gender Participation Comparison</div>
@@ -187,14 +172,13 @@
                     </td>
                 </tr>
 
-                <!-- ROW 5 -->
                 <tr>
                     <td class="cat2">
                         <div class="chart-title">Participation Rate by Household Income</div>
                         <div class="chart-subtitle">Participation peaks among households earning $100k-$149k</div>
                         <div id="scatterplot"></div>
                         <div class="story">Participation rates generally increase alongside household income until
-                            reaching the $100,000–$149,999 income bracket, where participation peaks nationally.
+                            reaching the $100,000-$149,999 income bracket, where participation peaks nationally.
                             Participation then declines slightly among the highest-income households, suggesting
                             strongest engagement among middle-to-upper-middle income groups.</div>
                         <div class="insight">Key Insight: Participation peaks among middle-to-upper-middle income
@@ -227,29 +211,22 @@
             </tbody>
 
             <tbody id="places-section" class="section-box section3-border">
-                <!-- ROW 6 (FULL WIDTH CATEGORY BREAK) -->
                 <tr>
                     <td colspan="3" class="full-span section3-heading">
-
                         <div class="section-header-row">
-
                             <div>
                                 <div class="section-title">WHERE: Places and Spaces</div>
-
                                 <div class="section-subtitle">This section explores where Australians participate in
                                     badminton across urban, regional, organised, and informal environments</div>
                             </div>
-
                             <div class="section-buttons">
                                 <a href="#participants-section" class="top-button">← Prev</a>
                                 <a href="#top" class="top-button">↑ Top</a>
                             </div>
-
                         </div>
                     </td>
                 </tr>
 
-                <!-- ROW 7 -->
                 <tr>
                     <td class="cat3">
                         <div class="chart-title">Participation by Remoteness</div>
@@ -295,33 +272,28 @@
             <tbody id="others-section" class="section-box section4-border">
                 <tr>
                     <td colspan="3" class="full-span section4-heading">
-
                         <div class="section-header-row">
-
                             <div>
                                 <div class="section-title">OTHERS: Experience and Impact</div>
-
                                 <div class="section-subtitle">This section explores the broader experiences, economic
                                     impact, injuries, and volunteer contributions shaping badminton participation</div>
                             </div>
-
                             <div class="section-buttons">
                                 <a href="#places-section" class="top-button">← Prev</a>
                                 <a href="#top" class="top-button">↑ Top</a>
                             </div>
-
                         </div>
                     </td>
                 </tr>
 
-                <!-- ROW 8 -->
                 <tr>
                     <td class="cat4">
                         <div class="chart-title">Financial Commitment to Participation</div>
                         <div class="chart-subtitle">Over 215,000 Australians paid to participate in badminton</div>
                         <div id="waffle_chart"></div>
                         <div class="story">More than half of badminton participants paid to participate in the sport,
-                            contributing over $69.4 million in total expenditure nationally in 2024. Participants recorded a
+                            contributing over $69.4 million in total expenditure nationally in 2024. Participants
+                            recorded a
                             median expenditure of $100 and an average expenditure of $321, reflecting varying financial
                             commitment levels.</div>
                         <div class="insight">Key Insight: Over half of badminton participants financially contribute to
@@ -345,16 +317,15 @@
                         <div class="chart-subtitle">Most badminton support roles are overwhelmingly volunteer-driven
                         </div>
                         <div id="stacked_bar"></div>
-                        <div class="story">The chart demonstrates that volunteering forms the backbone of badminton’s
+                        <div class="story">The chart demonstrates that volunteering forms the backbone of badminton's
                             non-playing operations nationwide. Fundraising, administration, and support roles rely
-                            heavily on volunteers, highlighting the sport’s strong community-driven culture beyond
+                            heavily on volunteers, highlighting the sport's strong community-driven culture beyond
                             active player participation.</div>
                         <div class="insight">Key Insight: Community volunteering is essential to sustaining badminton's
                             non-playing operational roles nationwide.</div>
                     </td>
                 </tr>
             </tbody>
-
 
         </table>
 
@@ -363,24 +334,19 @@
     <footer>
         <div class="footer-wrapper">
             <div>
-
                 <div class="footer-main-icon">💡</div>
-
             </div>
 
             <div class="footer-left">
-
                 <div class="footer-title">
                     KEY TAKEAWAY
                 </div>
-
                 <div class="footer-text">
                     Badminton participation in Australia is shaped by strong urban concentration, youth engagement,
                     and highly social forms of participation. While participation continues growing through expanding
                     infrastructure and community support, disparities across geography, gender, and demographics reveal
                     important opportunities for more inclusive development nationwide.
                 </div>
-
             </div>
 
             <div class="footer-icons">
@@ -415,9 +381,10 @@
         </div>
         <div>
             <div class="footer-info">
-                <strong>Data sources:</strong>Australian Sports Commission & Badminton Australia annual reports (2020-2024) &nbsp
+                <strong>Data sources:</strong>Australian Sports Commission & Badminton Australia annual reports
+                (2020-2024) &nbsp
                 <strong>Author:</strong>Li Yang Oh &nbsp
-                <strong>Date:</strong>25 May 2026
+                <strong>Date:</strong>27 May 2026
             </div>
         </div>
     </footer>

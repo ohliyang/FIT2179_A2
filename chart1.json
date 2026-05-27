@@ -88,7 +88,7 @@
               "State Population"
             ]
           }
-        } 
+        }
       ],
       "params": [
         {
@@ -251,73 +251,73 @@
     },
     {
       "data": {
-    "values": [
-      {
-        "State Symbol": "WA",
-        "lon": 122,
-        "lat": -25,
-        "Estimate": 35000,
-        "dx": 0,
-        "dy": 0
+        "values": [
+          {
+            "State Symbol": "WA",
+            "lon": 122,
+            "lat": -25,
+            "Estimate": 35000,
+            "dx": 0,
+            "dy": 0
+          },
+          {
+            "State Symbol": "NT",
+            "lon": 133,
+            "lat": -18,
+            "Estimate": 4000,
+            "dx": 0,
+            "dy": -18
+          },
+          {
+            "State Symbol": "SA",
+            "lon": 136,
+            "lat": -29,
+            "Estimate": 18000,
+            "dx": 0,
+            "dy": 18
+          },
+          {
+            "State Symbol": "QLD",
+            "lon": 145,
+            "lat": -22,
+            "Estimate": 72000,
+            "dx": 0,
+            "dy": 0
+          },
+          {
+            "State Symbol": "NSW",
+            "lon": 147,
+            "lat": -32,
+            "Estimate": 138000,
+            "dx": 0,
+            "dy": 0
+          },
+          {
+            "State Symbol": "ACT",
+            "lon": 149,
+            "lat": -34.7,
+            "Estimate": 8000,
+            "dx": 0,
+            "dy": -18
+          },
+          {
+            "State Symbol": "VIC",
+            "lon": 145,
+            "lat": -37,
+            "Estimate": 125000,
+            "dx": 0,
+            "dy": 0
+          },
+          {
+            "State Symbol": "TAS",
+            "lon": 146.6,
+            "lat": -42.7,
+            "Estimate": 6000,
+            "dx": 0,
+            "dy": 18
+          }
+        ]
       },
-      {
-        "State Symbol": "NT",
-        "lon": 133,
-        "lat": -18,
-        "Estimate": 4000,
-        "dx": 0,
-        "dy": -18
-      },
-      {
-        "State Symbol": "SA",
-        "lon": 136,
-        "lat": -29,
-        "Estimate": 18000,
-        "dx": 0,
-        "dy": 18
-      },
-      {
-        "State Symbol": "QLD",
-        "lon": 145,
-        "lat": -22,
-        "Estimate": 72000,
-        "dx": 0,
-        "dy": 0
-      },
-      {
-        "State Symbol": "NSW",
-        "lon": 147,
-        "lat": -32,
-        "Estimate": 138000,
-        "dx": 0,
-        "dy": 0
-      },
-      {
-        "State Symbol": "ACT",
-        "lon": 149,
-        "lat": -34.7,
-        "Estimate": 8000,
-        "dx": 0,
-        "dy": -18
-      },
-      {
-        "State Symbol": "VIC",
-        "lon": 145,
-        "lat": -37,
-        "Estimate": 125000,
-        "dx": 0,
-        "dy": 0
-      },
-      {
-        "State Symbol": "TAS",
-        "lon": 146.6,
-        "lat": -42.7,
-        "Estimate": 6000,
-        "dx": 0,
-        "dy": 18
-      }
-    ]
-  },
       "mark": {
         "type": "text",
         "fontSize": 10,
